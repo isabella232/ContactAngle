@@ -1,0 +1,44 @@
+#!/bin/bash
+# Source tutorial run functions
+. ./bashrc
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+
+if ! [ -d $I_DIR/bin ]; then
+    mkdir -p $I_DIR/bin
+fi
+
+
+if [ -n "$1" ]; then
+    dataFiles=$1
+else
+    dataFiles="$(ls )"
+fi
+
+
+
+for case in $dataFiles
+do
+    if [ -f $case/$case.H ]; then
+        if [ -f $case/Makefile ]; then
+            echo " $case"
+            (cd $case && make)
+        else
+            echo "   skipping $case"
+        fi
+    fi
+done
+
+for case in $dataFiles
+do
+    if ! [ -f $case/$case.H ]; then
+        if [ -f $case/Makefile ]; then
+            echo " $case"
+            (cd $case && make)
+        else
+            if [ -d $case ]; then
+                echo " skipping $case"
+            fi
+        fi
+    fi
+done
