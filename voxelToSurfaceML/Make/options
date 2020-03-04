@@ -9,5 +9,5 @@ EXE_INC = -std=c++0x \
 EXE_LIBS = \
     -lfiniteVolume \
     -lsurfMesh \
-    -L$(I_DIR)/bin -lvoxelMesh
+    -L$(myBinDir) -lvoxelMesh
 

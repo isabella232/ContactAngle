@@ -4,8 +4,8 @@
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 
-if ! [ -d $I_DIR/bin ]; then
-    mkdir -p $I_DIR/bin
+if ! [ -d $myBinDir ]; then
+    mkdir -p $myBinDir || exit
 fi
 
 
