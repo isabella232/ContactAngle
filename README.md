@@ -21,7 +21,7 @@ To check that the directories are created
 correctly, type in a terminal:
 
 ```{.bash language="bash"}
-#  Important: replace ~/works/apps with the 
+#  Important: replace ~/works/contactAngle with the 
 #  directory in which you have extracted the codes 
 ls  ~/works/contactAngle/voxelImage
 ```
