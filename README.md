@@ -91,7 +91,7 @@ Note: In this step, the output file from the previous step (\*\_Layered.vtk) is 
 Note: The contact angle is computed on each vertex that belongs to the contact line set, i ∈ _V_<sub>_CL_</sub>. The contact angle (\theta <sub>_i_</sub>)for each vertex is calculated through the brine phase by:
 <!-- \theta_i = \pi - \acos (\textbf{n}_i|_{\textbf{z}_2} \cdot \textbf{n}_i|_{\textbf{z}_3}),   i \in V_{CL} -->
 <img src="http://latex.codecogs.com/svg.latex?\theta_i=\pi-\cos^{-1}(\textbf{n}_i|_{\textbf{z}_2}\cdot\textbf{n}_i|_{\textbf{z}_3}),$\quad$i$\in$V_{_{CL}}" border="0"/>
-The normal vectors are computed on the vertices comprising the contact line, i ∈ _V_<sub>_CL_</sub>. Each vertex is represented with two vectors normal to the oil/brine interface (**z**<sub>2</sub>) and the brine/rock interface (**z**<sub>3</sub>), as shown in abstract figure.
+The normal vectors are computed on the vertices comprising the contact line, i ∈ _V_<sub>_CL_</sub>. Each vertex is represented with two vectors normal to the oil/brine interface (z<sub>2</sub>) and the brine/rock interface (z<sub>3</sub>), as shown in abstract figure.
 
 ## Running the surface roughness code
 
