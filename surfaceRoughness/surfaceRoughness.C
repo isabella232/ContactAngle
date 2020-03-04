@@ -101,7 +101,6 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
 
     #define labelLoop face
-		#define nextLabelInLoop(list,i)  (i<list.size()-1 ? list[i+1] : list[0])
 
     const pointField & points=surf123.points();
     const List<face> & faces=surf123.faces();
@@ -116,14 +115,11 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
            appendUnique(pointPointsTmp[ f[pI] ], f.prevLabel(pI));
         }
     }
-    //~ Info<<"\n........"<<endl<<endl ;
 
     forAll(pointPoints,i)
     {
         pointPoints[i].setSize(pointPoints[i].size());
         pointPoints[i]=face(pointPointsTmp[i]);
-
-    //~ Info<<pointPoints[i].size()<<" "<<i<<" "<<pointPoints[i]<<endl ;
     }
 
     pointField newPoints(points);
@@ -203,7 +199,6 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
 	}
 
-//~ pWeights=1.0;
 
 
 

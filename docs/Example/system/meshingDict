@@ -1,10 +1,4 @@
-/*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  1.6                                   |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
-\*---------------------------------------------------------------------------*/
+
 FoamFile
 {
     version     2.0;
@@ -15,6 +9,8 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+
+//! voxelToSurfaceML keywords
 headerName Sample1_subvolume.raw_header;
 inputName Sample1_subvolume.raw;
 outputSurface  Sample1_subvolume.vtk;
@@ -32,6 +28,7 @@ surfaceSmoothing
 	inputSurface   "Sample1_subvolume_Layered.vtk";
 	outputSurface   "Sample1_subvolume_Layered_Smooth.vtk";
 
+	relaxationFactor   0.5;
 	extraRelaxFactorParIntrf   0.2;
 	
 
@@ -72,21 +69,6 @@ nIterationsRoughness	200;
 relaxFactorRoughness	0.05;
 relaxFactorRoughnessCL	0.05;
 }
-
-
-/// Ignore these:
-
-outputName  Sample1_subvolume.raw; //only raw accepted for now
-trimName  trimingratios;
-nSmoothing 2;
-//intactFraction (0.9 0.9 0.9);
-
-nSmoothBegin (0 0 0); 
-nSmoothEnd (0 0 0); 
-perforationDepth 0;
-perforationWidth 0;
-perforationLengthFraction 0.0;
-nCopyLayers  1;
 
 
 // ************************************************************************* //

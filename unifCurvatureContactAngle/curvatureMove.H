@@ -88,11 +88,11 @@ Description
                      vector Ce=0.5*(newPoints[e[0]] + newPoints[e[1]]);
                      
                      /// big impact...!!
-                     //~ vector Le_se = 0.5*(0.5*Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]); ///. wrong
-                     //~ vector Le_se = 0.33333*(Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]);
+                     //vector Le_se = 0.5*(0.5*Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]); ///. wrong
+                     //vector Le_se = 0.33333*(Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]);
                      vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[faceI]*/) ^ (Ce-Cf[faceI])) + 0.5*mag(Ce-Cf[faceI])/(mag(L_E)+1.0e-18)*(L_E);
 
-					
+
 					
 					 pKc[e[0]] += Le_se & pNs[e[0]];
 					 pKc[e[1]] -= Le_se & pNs[e[1]];
@@ -116,8 +116,8 @@ Description
                      vector Nex2=(pNs[e[0]] + pNs[e[1]]);
                      vector Ce=0.5*(newPoints[e[0]] + newPoints[e[1]]);
                      
-                     //~ vector Le_se = 0.5*(0.5*Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]); ///. wrong
-                     //~ vector Le_se = 0.33333*(Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]);
+                     //vector Le_se = 0.5*(0.5*Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]); ///. wrong
+                     //vector Le_se = 0.33333*(Nex2+fNorms[faceI]) ^ (Ce-Cf[faceI]);
                      vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[faceI]*/) ^ (Ce-Cf[faceI])) + 0.5*mag(Ce-Cf[faceI])/(mag(L_E)+1.0e-18)*(L_E);
 				
 					 pKcw[e[0]] += Le_se & pNw[e[0]];
@@ -192,7 +192,7 @@ Description
 						{
 							scalar weight=pWeights[neiVertI];  weight*=weight;weight*=weight;
 							if( pMarks[neiVertI] == 4) weight*=0.01;
-							//~ if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.0;
+							//if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.0;
 							avgAKcp += weight * pKcSmoothTmp[neiVertI];
 							sumWeightsKc += weight;
 						}
@@ -266,15 +266,15 @@ Description
 
 
 
-            //~ if( currentLabel == 4  )
-            //~ { ///. contact line curvature uniformization
-               //~ vector DispCL =  relaxCL*(-0.05*(pKcSmooth[vertI]-pKc[vertI])+ 5.0*(pKcCL[vertI]-pKcCLSmooth[vertI]))* pAreas[vertI]*pNs[vertI];
-               //~ displacementsRc[vertI] =  (DispCL - (DispCL & pNw[vertI])*pNw[vertI]);
-            //~ }
-            //~ else  if(currentLabel == 2)
-            //~ {  ///. curvature uniformization
-                //~ displacementsRc[vertI] =  relax*(pKc[vertI]-pKcSmooth[vertI]) * pAreas[vertI]*pNs[vertI];
-            //~ }
+            //if( currentLabel == 4  )
+            //{ ///. contact line curvature uniformization
+               //vector DispCL =  relaxCL*(-0.05*(pKcSmooth[vertI]-pKc[vertI])+ 5.0*(pKcCL[vertI]-pKcCLSmooth[vertI]))* pAreas[vertI]*pNs[vertI];
+               //displacementsRc[vertI] =  (DispCL - (DispCL & pNw[vertI])*pNw[vertI]);
+            //}
+            //else  if(currentLabel == 2)
+            //{  ///. curvature uniformization
+                //displacementsRc[vertI] =  relax*(pKc[vertI]-pKcSmooth[vertI]) * pAreas[vertI]*pNs[vertI];
+            //}
 		}
 
 
@@ -290,7 +290,7 @@ Description
         forAll(pointPoints, vertI)
         {
 			label currentLabel = pMarks[vertI];
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				// if (currentLabel==2||currentLabel==4)	
 				if (currentLabel==2 && currentLabel!=4)	
@@ -308,7 +308,7 @@ Description
         forAll(pointPoints, vertI)
         {
 			label currentLabel = pMarks[vertI];
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {	
 				if (currentLabel==1||currentLabel==3 ||currentLabel==4)		
 				{
@@ -325,7 +325,7 @@ Description
 		offRc<<"Kc 1 "<<pointPoints.size()<<" float"<<std::endl;
         forAll(pointPoints, vertI)
         {
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				if ((vertI+1)%1==0)	offRc<<"";
 				offRc<<pKc[vertI]<<" "<<"  \n";    
@@ -334,7 +334,7 @@ Description
        offRc<<"Kcw 1 "<<pointPoints.size()<<" float"<<std::endl;
         forAll(pointPoints, vertI)
         {
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				if ((vertI+1)%1==0)	offRc<<"";
 				offRc<<pKcw[vertI]<<" "<<"  \n";    
@@ -343,7 +343,7 @@ Description
 		offRc<<"\n\n RcCL 1 "<<pointPoints.size()<<" float"<<std::endl;
         forAll(pointPoints, vertI)
         {
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				if ((vertI+1)%1==0)	offRc<<"";
 				offRc<<pKcCL[vertI]<<" "<<"  \n";    
@@ -352,7 +352,7 @@ Description
 		offRc<<"\n\n InterfNorms 3 "<<pointPoints.size()<<" float"<<std::endl;
         forAll(pointPoints, vertI)
         {
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				if ((vertI+1)%1==0)	offRc<<"";
 				offRc<<pNs[vertI][0]<<" "<<pNs[vertI][1]<<" "<<pNs[vertI][2]<<" "<<" \n";    
@@ -361,7 +361,7 @@ Description
 		offRc<<"\n\n wallNorms 3 "<<pointPoints.size()<<" float"<<std::endl;
         forAll(pointPoints, vertI)
         {
-            if(iter==iters-1)
+            if(iter==nIters-1)
             {
 				if ((vertI+1)%1==0)	offRc<<"";
 				offRc<<pNw[vertI][0]<<" "<<pNw[vertI][1]<<" "<<pNw[vertI][2]<<" "<<"  \n";    
@@ -370,7 +370,7 @@ Description
 
 		offRc.close();
 		
-		//~ newPoints += displacementsRc;
+		//newPoints += displacementsRc;
         
 
 
@@ -388,10 +388,8 @@ Description
 	vectorField displacements(newPoints.size(), vector(0,0,0));
 	forAll(pointPoints, vertI)
 	{
-
 		const labelLoop& neiPoints = pointPoints[vertI];
 		label currentLabel = pMarks[vertI];
-
 
 		vector avgPos(vector::zero);
 		scalar sumWeights(1.0e-28); 
@@ -423,58 +421,37 @@ Description
 
 				scalar weight=(pAreas[neiVertI]+0.1*pAreas[vertI]);//*max(NormalsOld[neiVertI]&NormalsOld[vertI],0.001);// /mag(newPoints[neiVertI]-newPoints[vertI]);
 				weight*=weight*pWeights[neiVertI];
-				//~ if( pMarks[neiVertI]!=currentLabel ) weight*=0.9;     ///.  TODO change 0.7, smaller value makes CL faces bigger
-				//~ if( pMarks[neiVertI]==3 ) weight*=2.0;     ///.  TODO change 0.7, smaller value makes CL faces bigger
+				//if( pMarks[neiVertI]!=currentLabel ) weight*=0.9;     ///.  TODO change 0.7, smaller value makes CL faces bigger
+				//if( pMarks[neiVertI]==3 ) weight*=2.0;     ///.  TODO change 0.7, smaller value makes CL faces bigger
 				avgPos += weight * newPoints[neiVertI];
 				sumWeights += weight;
 
-		  }
+			}
 		}
 		  
-			if (sumWeights>1.0e-18)
-			{
-				avgPos /= sumWeights;//myEdges.size();
-				displacements[vertI] = avgPos-newPoints[vertI]; //(0.8*relax)*((avgPos-newPoints[vertI])&pNw[vertI])*pNw[vertI] + (0.2*relax)*(avgPos-newPoints[vertI]);
-			}
-
-
-			//~ if( currentLabel == 4  )
-			//~ { ///. contact line smoothing
-				//~ vector avgPos(vector::zero);
-				//~ scalar sumWeights(1.0e-16); 
-				//~ forAll(neiPoints, iii)
-				//~ {
-					//~ const label neiVertI = neiPoints[iii];
-					//~ if( pMarks[neiVertI] == 4  )
-					//~ {
-						//~ scalar weight=1.0;
-						//~ avgPos += weight * newPoints[neiVertI];
-						//~ sumWeights += weight;
-					//~ }
-				//~ }
-				//~ vector DispCL =  (avgPos/sumWeights-newPoints[vertI]); // relax*((avgPos/sumWeights-newPoints[vertI])&pNs[vertI])*pNs[vertI]; 
-				//~ DispCL =  (DispCL & pNs[vertI])*pNs[vertI];
-				//~ displacementsCL[vertI] =  (DispCL - (DispCL & pNw[vertI])*pNw[vertI]);
-			//~ }
+		if (sumWeights>1.0e-18)
+		{
+			avgPos /= sumWeights;//myEdges.size();
+			displacements[vertI] = avgPos-newPoints[vertI]; //(0.8*relax)*((avgPos-newPoints[vertI])&pNw[vertI])*pNw[vertI] + (0.2*relax)*(avgPos-newPoints[vertI]);
+		}
 
       }
 	  newPoints += 0.5*relax*(displacements - 0.5*(displacements& pNw)*pNw);
-	  //~ newPoints += 0.03*relaxCL*displacementsCL;
+	  //newPoints += 0.03*relaxCL*displacementsCL;
 	
 
 /// moving contact line back to the solid wall (alleviate the crunch effect)
-	
-	  displacements=newPoints-previousPoints2;
 
+	displacements=newPoints-previousPoints2;
 
-     for (int iKern=0; iKern<2; ++iKern)
-     {
+	for (int iKern=0; iKern<2; ++iKern)
+	{
  	  vectorField displacementsTmp = displacements;
       forAll(pointPoints, vertI)
       {
 		label currentLabel = pMarks[vertI];
 		bool curentLabelEq2 = currentLabel==2;
-		//~ if( currentLabel != 2  )
+		//if( currentLabel != 2  )
 		{ ///. contact line smoothing Vol preserve
 			const labelLoop& neiPoints = pointPoints[vertI];
 			vector avgDisp(vector::zero);
@@ -482,7 +459,7 @@ Description
 			forAll(neiPoints, iii)
 			{
 				const label neiVertI = neiPoints[iii];
-				//~ if( pMarks[neiVertI] == currentLabel  )
+				//if( pMarks[neiVertI] == currentLabel  )
 				if( pMarks[neiVertI]==currentLabel || !( (pMarks[neiVertI]==2) ^ curentLabelEq2)  || pMarks[neiVertI] == 4  )
 				{
 					scalar weight=pAreas[neiVertI];
@@ -494,17 +471,14 @@ Description
 			displacements[vertI] = avgDisp/sumWeights;
 
 		}
-
       }
-     }
+	}
 
 	displacements = 0.3*displacements+0.7*(displacements& pNw)*pNw;
 	displacements = 0.3*displacements+0.7*(displacements& pNs)*pNs;
 	newPoints -= 1.09*displacements;     ///.  TODO change 0.5 0.5,  sum should be 1
 	
-		Info  <<"CL "; cout.flush();
-
-
+	Info  <<"CL "; cout.flush();
 
 
 
@@ -512,11 +486,12 @@ Description
 	surf123.movePoints(newPoints);
 
 
+
 	displacements = newPoints-previousPoints;
 
 	Info<< "  A:  ["<<min(pAreas)<<" "<<max(pAreas)<<"] "; cout.flush();
 	Info<< "  k:  ["<<min(pKc); cout.flush();
-	//~ Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1.0e8,1.0e6),-1.0e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
+	//Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1.0e8,1.0e6),-1.0e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
 	Info<< " "<<max(pKc); cout.flush();
 	Info<< "],  DispMag  max:  "<<max(mag(displacements)); cout.flush();
 	Info<< "  avg:  "<<average(mag(displacements)); cout.flush();

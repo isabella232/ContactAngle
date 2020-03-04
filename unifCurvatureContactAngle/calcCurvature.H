@@ -50,34 +50,6 @@ Rc 1 75466 float
 
 
 
-
-
-
-
-
-
-
-
-
-
-    //~ const labelListList& faceFaces=surf123.faceFaces();
-    //~ scalarField curvature(faceNormals.size(),1.0e-12);
-     //~ ///. TODO to define normal vectors separately  
-    //~ forAll(faceFaces,faceI)
-    //~ {
-        //~ const neiFaces & neifs=faceFaces[faceI];
-        //~ forAll(neifs, inf)
-        //~ {
-			//~ if( fMarks[neifs[inf]] ==  fMarks[faceI]  )
-			//~ { 
-			   //~ vector nf = 0.5*(faceNormals[neifs[inf]]+faceNormals[faceI]);
-			   //~ 
-			   //~ nNormals[f[pI]]+=1.0;
-		    //~ }
-        //~ }
-    //~ }
-   //~ pNw=pNw/nNormals;
-   
     scalarField curvature(fNorms.size(),1.0e-12);
      ///. TODO to define normal vectors separately  
     forAll(faces,faceI)
@@ -94,9 +66,6 @@ Rc 1 75466 float
         }
 		curvature[faceI] /= f.mag(newPoints);
     }
-
-/// /////////////////////////////////////////////
-
 
 
 

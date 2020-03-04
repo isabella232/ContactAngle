@@ -60,7 +60,7 @@ void Foam::primitiveMesh::calcEdges() const
   // create a list of edges for each face and store for efficiency
   edgeListList edgesOfFace(nFaces());
 
-  forAll (f, faceI)
+  for_ (f, faceI)
   {
 		edgesOfFace[faceI] = f[faceI].edges();
 
@@ -70,7 +70,7 @@ void Foam::primitiveMesh::calcEdges() const
 
 		curFE.setSize(f[faceI].nEdges());
 
-		forAll (curFE, curFEI)
+		for_ (curFE, curFEI)
 		{
 			 curFE[curFEI] = -1;
 		}
@@ -82,7 +82,7 @@ void Foam::primitiveMesh::calcEdges() const
   edgeList& e = *edgesPtr_;
   label nEdges = 0;
 
-  forAll (pf, pointI)
+  for_ (pf, pointI)
   {
 		const labelList& curFaces = pf[pointI];
 
@@ -91,13 +91,13 @@ void Foam::primitiveMesh::calcEdges() const
 		DynamicList<DynamicList<label, edgesPerPoint_> > faceGivingNeighbour;
 		DynamicList<DynamicList<label, edgesPerPoint_> > edgeOfFaceGivingNeighbour;
 
-		forAll (curFaces, faceI)
+		for_ (curFaces, faceI)
 		{
 			 // get the edges
 			 const edgeList& fEdges = edgesOfFace[curFaces[faceI]];
 
 			 // for every edge
-			 forAll(fEdges, edgeI)
+			 for_(fEdges, edgeI)
 			 {
 				  const edge& ends = fEdges[edgeI];
 
@@ -124,7 +124,7 @@ void Foam::primitiveMesh::calcEdges() const
 						// check if the edge has already been added
 						bool added = false;
 
-						forAll (addedNeighbours, eopI)
+						for_ (addedNeighbours, eopI)
 						{
 							 if (secondPoint == addedNeighbours[eopI])
 							 {
@@ -162,7 +162,7 @@ void Foam::primitiveMesh::calcEdges() const
 		// reshuffled.
 		labelList shuffleList(addedNeighbours.size());
 
-		forAll (shuffleList, i)
+		for_ (shuffleList, i)
 		{
 			 shuffleList[i] = i;
 		}
@@ -191,7 +191,7 @@ void Foam::primitiveMesh::calcEdges() const
 
 		labelList reshuffleList(shuffleList.size());
 
-		forAll(shuffleList, i)
+		for_(shuffleList, i)
 		{
 			 reshuffleList[shuffleList[i]] = i;
 		}
@@ -200,14 +200,14 @@ void Foam::primitiveMesh::calcEdges() const
 
 		labelListList fgn(faceGivingNeighbour.size());
 
-		forAll (faceGivingNeighbour, i)
+		for_ (faceGivingNeighbour, i)
 		{
 			 fgn[reshuffleList[i]].transfer(faceGivingNeighbour[i].shrink());
 		}
 
 		labelListList eofgn(edgeOfFaceGivingNeighbour.size());
 
-		forAll (edgeOfFaceGivingNeighbour, i)
+		for_ (edgeOfFaceGivingNeighbour, i)
 		{
 			 eofgn[reshuffleList[i]].transfer
 			 (
@@ -216,12 +216,12 @@ void Foam::primitiveMesh::calcEdges() const
 		}
 
 		// adding the edges
-		forAll(addedNeighbours, edgeI)
+		for_(addedNeighbours, edgeI)
 		{
 			 const labelList& curFgn = fgn[edgeI];
 			 const labelList& curEofgn = eofgn[edgeI];
 
-			 forAll (curFgn, fgnI)
+			 for_ (curFgn, fgnI)
 			 {
 				  fe[curFgn[fgnI]][curEofgn[fgnI]] = nEdges;
 			 }

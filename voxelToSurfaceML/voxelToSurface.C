@@ -28,7 +28,6 @@ Martin J Blunt:  m.blunt@imperial.ac.uk
     #include <vector>
 
     #include <assert.h>
-#include "voxelMesh.h"
 
 #include "fvCFD.H"
 
@@ -88,78 +87,48 @@ int main(int argc, char *argv[])
 
 
 
-    voxelMesh voxelImage;
+	voxelMesh vximage;
 
-	readFromHeader(voxelImage, headerName, inputName);
+	readFromHeader(vximage, headerName, inputName);
 
-	voxelImage.growBox(0);
+	vximage.growBox(0);
 
-
-
-
-	//~ label nCopyLayers(readLabel(meshingDict.lookup("nCopyLayers"))) ;
-	//~ Info<<"nCopyLayers: "<<nCopyLayers<<endl;
 
 	
     unsigned int n[3];
-	voxelImage.getSize(n[0],n[1],n[2]);
-    //voxelImage.crop(0,n[0]-1,0,n[1]-1,0,n[2]-1, 2 ,0);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    voxelImage.crop(0,n[0]-1,0,n[1]-1,0,n[2]-1, 2 ,1);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	vximage.getSize(n[0],n[1],n[2]);
+    //vximage.crop(0,n[0]-1,0,n[1]-1,0,n[2]-1, 2 ,0);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    vximage.crop(0,n[0]-1,0,n[1]-1,0,n[2]-1, 2 ,1);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-	 voxelImage.median(6);		
-	 voxelImage.median(4);	
-	 voxelImage.median(3);
-	 voxelImage.median(2);	
+	 vximage.median(6);		
+	 vximage.median(4);	
+	 vximage.median(3);
+	 vximage.median(2);	
 
-	 voxelImage.median(4);
-	 voxelImage.median(6);	
-	 voxelImage.median(3);
-	 voxelImage.median(2);
-	 voxelImage.median(3);
-	 voxelImage.median(4);
-	 voxelImage.median(2);
-	 voxelImage.median(3);
-	 voxelImage.median(4);
-	 voxelImage.median(2);
-	 voxelImage.median(3);
-	 voxelImage.median(4);
-	 voxelImage.median(3);
-	 voxelImage.median(2);
-	 voxelImage.median(4);
-	 voxelImage.median(3);
-	 voxelImage.median(2);
-	 voxelImage.median(4);
-	 voxelImage.median(6);
+	 vximage.median(4);
+	 vximage.median(6);	
+	 vximage.median(3);
+	 vximage.median(2);
+	 vximage.median(3);
+	 vximage.median(4);
+	 vximage.median(2);
+	 vximage.median(3);
+	 vximage.median(4);
+	 vximage.median(2);
+	 vximage.median(3);
+	 vximage.median(4);
+	 vximage.median(3);
+	 vximage.median(2);
+	 vximage.median(4);
+	 vximage.median(3);
+	 vximage.median(2);
+	 vximage.median(4);
+	 vximage.median(6);
 	
 			
-	//~ voxelImage.median(2);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(2);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(4);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(6);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(4);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(4);
-	//~ voxelImage.median(6);
-	//~ voxelImage.median(2);
-	//~ voxelImage.median(6);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(4);
-	//~ voxelImage.median(3);
-	//~ voxelImage.median(4);
-	//~ voxelImage.median(6);	
-
-    voxelImage.printInfo();
+    vximage.printInfo();
  
-    writeSTLBINARY(voxelImage, outputSurface);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    writeSTLBINARY(vximage, outputSurface);//         XXXXXXXXXXXXXXXXXXXXXXXXXXXX
     
     Info<<"finished  writeSTLBINARY, "<<endl;
 

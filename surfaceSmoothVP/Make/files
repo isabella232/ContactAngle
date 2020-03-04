@@ -1,4 +1,0 @@
-
-surfaceSmoothVP.C
-
-EXE = $(I_DIR)/bin/surfaceSmoothVP

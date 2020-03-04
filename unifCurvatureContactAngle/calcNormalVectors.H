@@ -29,16 +29,16 @@ Description
      pointField Cf=surf123.faceCentres();
 
 
-     //~ vectorField fNorms(faces.size(),vector(0,0,0));
-     //~ forAll(faces,faceI)
-     //~ {   const face & f=faces[faceI];
-         //~ forAll(f, pI)
-         //~ {    label pCur=f[pI];
-             //~ fNorms[faceI] += (newPoints[pCur]-newPoints[f.prevLabel(pI)])^(newPoints[f.nextLabel(pI)]-newPoints[pCur]); 
-     //~ }    }
-     //~ fNorms=fNorms/(mag(fNorms)+1.0e-12);
+     //vectorField fNorms(faces.size(),vector(0,0,0));
+     //forAll(faces,faceI)
+     //{   const face & f=faces[faceI];
+         //forAll(f, pI)
+         //{    label pCur=f[pI];
+             //fNorms[faceI] += (newPoints[pCur]-newPoints[f.prevLabel(pI)])^(newPoints[f.nextLabel(pI)]-newPoints[pCur]); 
+     //}    }
+     //fNorms=fNorms/(mag(fNorms)+1.0e-12);
 
-///. point-normal vectors
+	/// Compute point-normal vectors
      vectorField pAw(pointPoints.size(),vector(0,0,0));
      vectorField pAs(pointPoints.size(),vector(0,0,0));
      forAll(faces,faceI)
@@ -74,37 +74,18 @@ Description
 					 pAs[e[1]] -= AEdgeTri;//2.0*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
 		  }    
 	  }
-     //~ scalarField pAreas(0.5*mag(pAs)+1.0e-16);
+     //scalarField pAreas(0.5*mag(pAs)+1.0e-16);
      scalarField pAreas(0.5*mag(pAs)+1.0e-18+0.5*mag(pAw));
      scalarField pAreastmp(0.5*mag(pAs)+1.0e-18+0.5*mag(pAw));
      vectorField pNs=pAs/(mag(pAs)+1.0e-18);
 
 
-///. point-normal vectors BC correction
-      //{
-          //vectorField pNNormB(pointPoints.size(),vector(0,0,0));
-          //forAll(faces,faceI)
-          //{   const face & f=faces[faceI];
-              //vector pNsS(0.0,0.0,0.0);
-              //forAll(f, pI)
-              //{    if( fMarks[faceI]!=2 && pMarks[f[pI]]==fMarks[faceI] )
-                      //pNsS+=pNs[f[pI]]; 
-              //}
-              //forAll(f, pI)
-              //{
-                  //if( fMarks[faceI]!=2 && pMarks[f[pI]]!=fMarks[faceI] )
-                      //pNNormB[f[pI]]+= pNsS*f.mag(points);   
-              //}
-          //}
-          //pNs-=pNNormB/(3.0*mag(pNNormB)+1.0e-12); ///.  TODO change 7.0 theoretical is 2 or 4, to check.
-          //pNs/=(mag(pNs)+1.0e-18);
-      //}
 
-	///. point-normal vectors correction at contact line (BC), using linear extrapolation
+	/// Correct point-normal vectors at contact line (BC), using linear extrapolation
 	forAll(pointPoints, vertI)
 	{
 		const labelLoop& neiPoints = pointPoints[vertI];
-		if( pMarks[vertI] == 4  ) ///. only for contact line
+		if( pMarks[vertI] == 4  ) //. only for contact line
 		{ 
 			vector  pNsNei(0,0,0);
 			forAll(neiPoints, neiPointI)

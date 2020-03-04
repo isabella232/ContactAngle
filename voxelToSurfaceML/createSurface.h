@@ -7,10 +7,10 @@ Free Software Foundation, either version 3 of the License, or (at
 your option) any later version. see <http://www.gnu.org/licenses/>.
 
 
-
 The code has been developed by Ali Qaseminejad Raeini as a part his PhD 
 at Imperial College London, under the supervision of Branko Bijeljic 
 and Martin Blunt. 
+
 Please see our website for relavant literature:
 http://www3.imperial.ac.uk/earthscienceandengineering/research/perm/porescalemodelling
 
@@ -55,7 +55,7 @@ void writeSTLBINARY( const voxelMesh & data, std::string outputSurface)
 
 
 
-    int nCells=0;
+
     int nInternalFaces=0;
     int nAllFaces=0;
     int nLeftFaces=0;
@@ -73,59 +73,50 @@ void writeSTLBINARY( const voxelMesh & data, std::string outputSurface)
 #define ucount1(type) count3(type)
 
 
-    for (unsigned int kk=1;kk<=n1;kk++)
-    {
-        for (unsigned int jj=1;jj<=n2;jj++)
-        {
-            for (unsigned int ii=1;ii<=n3;ii++)
-            {
-				
-				unsigned char vv=data[kk][jj][ii];
-                if (vv==1 || vv==2)
-                {                
-					///. Ahmed: TO ADD INDEX
-                        nCells++;
-
-					if (ii!=1)                                                                            
-					{                                                                                     
-						if (vv==data[kk][jj][ii-1])    {/*count3( Internal);internal[iface]=true;*/}          
-						else  if(1!=data[kk][jj][ii-1]) count3( All); 
-					}//else {count3( Back);}                                     
-					if (ii!=n3)                                                               
-					{                                                                         
-						if (vv==data[kk][jj][ii+1])    {/*ucount3( Internal);internal[iface]=true;*/}      
-						else if(1!=data[kk][jj][ii+1]) ucount3( All); 
-					}//else {ucount3( Front); }                                  
+    for (int kk=1;kk<=n1;kk++)
+     for (int jj=1;jj<=n2;jj++)
+       for (int ii=1;ii<=n3;ii++)
+    	{
+			unsigned char vv=data[kk][jj][ii];
+             if (vv==1 || vv==2)
+             {                
+				if (ii!=1)                                                                            
+				{                                                                                     
+					if (vv==data[kk][jj][ii-1])    {/*count3( Internal);internal[iface]=true;*/}          
+					else  if(1!=data[kk][jj][ii-1]) count3( All);
+				}//else {count3( Back);}                                     
+				if (ii!=n3)                                                               
+				{                                                                         
+					if (vv==data[kk][jj][ii+1])    {/*ucount3( Internal);internal[iface]=true;*/}      
+					else if(1!=data[kk][jj][ii+1]) ucount3( All);
+				}//else {ucount3( Front); }                                  
 
 
-					if (jj!=1)                                                            
-					{                                                                     
-						if (vv==data[kk][jj-1][ii])    {/*count2( Internal);internal[iface]=true;*/}       
-						else if(1!=data[kk][jj-1][ii]) count2( All);  
-					}//else {count2( Bottom)}                                
-					if (jj!=n2)                                                           
-					{                                                                     
-						if (vv==data[kk][jj+1][ii])    {/*ucount2( Internal);internal[iface]=true;*/}            
-						else if(1!=data[kk][jj+1][ii]) ucount2( All);  
-					}//else {ucount2( Top)}                                  
+				if (jj!=1)                                                            
+				{                                                                     
+					if (vv==data[kk][jj-1][ii])    {/*count2( Internal);internal[iface]=true;*/}       
+					else if(1!=data[kk][jj-1][ii]) count2( All);
+				}//else {count2( Bottom)}                                
+				if (jj!=n2) 
+				{                                                                     
+					if (vv==data[kk][jj+1][ii])    {/*ucount2( Internal);internal[iface]=true;*/}            
+					else if(1!=data[kk][jj+1][ii]) ucount2( All);
+				}//else {ucount2( Top)}                                  
 
 
-					if (kk!=1)                                                            
-					{                                                                     
-						if (vv==data[kk-1][jj][ii])    {/*count1( Internal);internal[iface]=true;*/}       
-						else  if(1!=data[kk-1][jj][ii]) count1( All); 
-					}//else {count1( Left)}                                  
-					if (kk!=n1)                                                           
-					{                                                                     
-						if (vv==data[kk+1][jj][ii])    {/*ucount1( Internal);internal[iface]=true;*/}      
-						else  if(1!=data[kk+1][jj][ii]) ucount1( All); 
-					}//else {ucount1( Right)}        
-                }
-            }
-        }
-    }
+				if (kk!=1)                                                            
+				{                                                                     
+					if (vv==data[kk-1][jj][ii])    {/*count1( Internal);internal[iface]=true;*/}       
+					else  if(1!=data[kk-1][jj][ii]) count1( All);
+				}//else {count1( Left)}                                  
+				if (kk!=n1)
+				{                                                                     
+					if (vv==data[kk+1][jj][ii])    {/*ucount1( Internal);internal[iface]=true;*/}      
+					else  if(1!=data[kk+1][jj][ii]) ucount1( All); 
+				}//else {ucount1( Right)}        
+             }
+         }
 
-    Info<<"nCells: "<<nCells<<endl;
     Info<<"nInternalFaces: "<<nInternalFaces<<endl;
     Info<<"nAllFaces: "<<nAllFaces<<endl;
     Info<<"nLeftFaces: "<<nLeftFaces<<endl;
@@ -164,7 +155,7 @@ faceList faces_Front(nFrontFaces);
         points.append(point(dx[0]*(kkk+1.0)+X0[0],dx[1]*(jjj+1.0)+X0[1],dx[2]*(iii+1.0)+X0[2]));     \
         point_mapper[iii][jjj][kkk]=++iPoints;                                          \
     }                                                                                   \
-    faces_##type[i##type ##Faces][pointIndex]=point_mapper[iii][jjj][kkk];              
+    faces_##type[i##type ##Faces][pointIndex]=point_mapper[iii][jjj][kkk];
 
 
 
@@ -193,14 +184,8 @@ faceList faces_Front(nFrontFaces);
 
     int iCells=-1;
 
-    //~ int iInternalFaces=-1;
+
     int iAllFaces=-1;
-    //~ int iLeftFaces=-1;
-    //~ int iRightFaces=-1;
-    //~ int iBottomFaces=-1;
-    //~ int iTopFaces=-1;
-    //~ int iBackFaces=-1;
-    //~ int iFrontFaces=-1;
 
     for (register unsigned int kk=1;kk<=n1;kk++)
     {
@@ -294,220 +279,7 @@ Info<<1<<endl;
 	correctbioti(faces_All,fMarks,points,1);
 
 Info<<2<<endl;
-/*
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
 
-	
-Info<<endl;
-
-	correctbioti(faces_All,fMarks,points,1);
-	correctbioti(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<3<<endl;
-	correctbioti(faces_All,fMarks,points,1);
-	correctbioti(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<3<<endl;
-
-
-
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<4<<endl;
-
-	
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<5<<endl;
-
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<6<<endl;
-
-	
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<7<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<8<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<9<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<10<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<11<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<12<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<13<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<14<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<15<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-
-Info<<16<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<17<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<18<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<19<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<19<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<20<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<21<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<22<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<23<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<24<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<25<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<26<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<23<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<24<<endl;
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<25<<endl;
-	correctbioti(faces_All,fMarks,points,2);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<26<<endl;
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<27<<endl;
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<28<<endl;
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-Info<<29<<endl;
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,0);
-	correctbioti2(faces_All,fMarks,points,1);
-	correctbioti2(faces_All,fMarks,points,2);
-	correctbioti(faces_All,fMarks,points,0);
-	correctbioti(faces_All,fMarks,points,1);
-	correctbioti(faces_All,fMarks,points,2);
-Info<<30<<endl;
-*/
 
 Info<<endl;
 
@@ -585,9 +357,9 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
 	const List<face>& faces = surf1.faces();
 	const pointField& points = surf1.points();
 	const labelList& meshPoints = surf1.meshPoints();
-  forAll(group1, gI)
+  forAll(group1, gfI)
   {
-	label connectingFace=group1[gI];
+	label connectingFace=group1[gfI];
 //-----------------------------------------------
 
     const labelList & myEdges=pEdges[meshPI];
@@ -666,12 +438,12 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
 
 void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points, bool handlemultipliConnectedEdges )
 { 
-    Info<<points.size()<<" points,  "<<faces.size()<<" faces, correcting:  * ";  cout.flush();
+    Info<<"	"<<points.size()<<" points,  "<<faces.size()<<" faces, correcting:  * ";  cout.flush();
 
     // new points and changed faces
     DynamicList<point> addedPoints(points.size()/100+1);
     DynamicList<face>  modifiedFaces(faces.size()/100+1);
-    DynamicList<label>  modifiedFacesIndices(faces.size()/100+1);
+    DynamicList<label>  changedFIndices(faces.size()/100+1);
 
     label nProblemPoints = 0;
 
@@ -708,30 +480,30 @@ void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points,
 				{   
 					
 				  bool PreviouslyModified=false;
-				  forAll(group1,gI)   if (findPos(modifiedFacesIndices,group1[gI])>=0)	PreviouslyModified=true;
+				  forAll(group1,gfI)   if (findPos(changedFIndices,group1[gfI])>=0)	PreviouslyModified=true;
 				  if (!PreviouslyModified)
 				  {		nProblemPoints++;
 
 					addedPoints.append(points[pI]); ++iLastPoint;  ///. duplicate the point, it will go to the end
 
-					forAll(group1,gI)
+					forAll(group1,gfI)
 					{
-						face modifiedFace=Sfaces[group1[gI]];        ///. get the face
+						face modifiedFace=Sfaces[group1[gfI]];        ///. get the face
 
-						label iModFace=findPos(modifiedFacesIndices,group1[gI]);
+						label iModFace=findPos(changedFIndices,group1[gfI]);
 						if (iModFace>=0)	{modifiedFace=modifiedFaces[iModFace];Info<<iModFace<<"Error in correcting faces : dbl cor face"<<endl;}; 
 
-						modifiedFacesIndices.append(group1[gI]);
-						label index=findPos(Sfaces[group1[gI]],pI);
+						changedFIndices.append(group1[gfI]);
+						label index=findPos(Sfaces[group1[gfI]],pI);
 						if (index>=0)	modifiedFace[index]=iLastPoint; ///. change the face
-						else	Info<<gI<<":Error in correcting faces : negative array index "<<index<<"  "
-							<<Sfaces[group1[gI]]<<" "<<nProblemPoints<<" "<<group1[gI]<<" "<<points[pI]<<endl; 
+						else	Info<<gfI<<":Error in correcting faces : negative array index "<<index<<"  "
+							<<Sfaces[group1[gfI]]<<" "<<nProblemPoints<<" "<<group1[gfI]<<" "<<points[pI]<<endl; 
 
 						modifiedFaces.append( modifiedFace );  ///. save the changed face
 					}
 				  }
 				}
-				else  Info<<"Error: point"<<pI<<", collected " <<  group1.size()<<" faces out of "<<myFaces.size()<<", skipped, as this will cause singly connected edges"<<endl; 
+				else  Info<<"Point"<<pI<<", collected " <<  group1.size()<<" faces out of "<<myFaces.size()<<", skipped, as this will cause singly connected edges"<<endl; 
 			}
 
 		}
@@ -743,10 +515,10 @@ void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points,
 
 
     Info<< nProblemPoints<< " shared edges,  "; 
-    Info<<"addedPoints: "<<addedPoints.size() <<"  changedFIndices: "<<modifiedFacesIndices.size() <<"  changedFaces: "<<modifiedFaces.size()<<"   ";       
+    Info<<"addedPoints: "<<addedPoints.size() <<"  changedFIndices: "<<changedFIndices.size() <<"  changedFaces: "<<modifiedFaces.size()<<"   ";       
 
 	points.append(addedPoints);
-	forAll(modifiedFacesIndices,i)	faces[ modifiedFacesIndices[i] ]= modifiedFaces[i];
+	forAll(changedFIndices,i)	faces[ changedFIndices[i] ]= modifiedFaces[i];
 
     Info<<faces.size()<<" faces "<<points.size()<<" points "<<endl;  
 
@@ -770,7 +542,6 @@ void correctbioti( faceList & faces, labelList& fMarks, DynamicField<point> & po
     Info<<points.size()<<" points,  "<<faces.size()<<" faces,  stage:"<<stage<<"   correcting: ";  cout.flush();
 
     DynamicList<label>  deletedFacesIndices(faces.size()/100+1);
-    //~ DynamicList<label>  mergedPointIndices(faces.size()/100+1,);
 
     label nProblemPoints = 0;
     label nbads = 0;
