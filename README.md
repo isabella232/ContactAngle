@@ -73,7 +73,7 @@ Note: the `controlDict` file is where run control parameters are set including s
 Open a terminal and type the following to run the code:
 
 ```  {.bash language="bash"}
-voxelToSurfaceML && surfaceAddLayerToCL && surfaceSmoothVP && more contactAngles.txt >>Kc.txt && more Kc.txt >> *_Layered_Smooth.vtk
+voxelToSurfaceML && surfaceAddLayerToCL && calcContactAngleUnifKc && more contactAngles.txt >>Kc.txt && more Kc.txt >> *_Layered_Smooth.vtk
 ``` 
 
 This command will execute the following:
