@@ -12,43 +12,31 @@ In the following, this document is organized into three sections. First is **Ins
 # Installation
 
 ## Prerequisites
-You should have official OpenFOAM (version 1606+ in this document: https://www.openfoam.com/releases/openfoam-v1606+/) installed in your Linux machine. Paraview should be installed for visualization, preferably through system provided packages.
+You should have official OpenFOAM (version v1906 in this document: https://www.openfoam.com/releases/openfoam-v1906, newer versions may work but are not tested) installed in your Linux machine. Paraview should be installed for visualization, preferably through system provided packages.
 
 ## Downloading and extracting files
-Create a directory in your home (`~`) folder named "works" and extract/download the codes inside it in a folder named apps. You can choose any other folder and the scripts will work, but this ducument assumes you install the codes in "`~/works/apps`" folder.
+Create a directory in your home (`~`) folder named "works" and extract/download the codes inside it in a folder named contactAngle. You can choose any other folder and the scripts will work, but this ducument assumes you install the codes in "`~/works/contactAngle`" folder.
 
-To clone and unzip this repo
-```bash
-git clone https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness
-tar -zxvf contactAngle.tar.gz
-cd contactAngle
-```
+To check that the directories are created 
+correctly, type in a terminal:
 
-To check that the directories are created correctly, type in a terminal:
-
-```  {.bash language="bash"}
+```{.bash language="bash"}
 #  Important: replace ~/works/apps with the 
 #  directory in which you have extracted the codes 
-ls   ~/works/apps/scripts   ~/works/apps/contactAngle/voxelImage
+ls  ~/works/contactAngle/voxelImage
 ```
 
-and it should not show the error message "`No such file or directory`".
+and it should not show the error message `No such file or directory`.
 
 ## Compiling the codes
-Edit the [`~/works/apps/contactAngle/bashrc`](../contactAngle/bashrc) file making sure it sources
-the OpenFOAM-1612+/etc/bashrc file based on your OpenFOAM installation
+Edit the [`~/works/contactAngle/bashrc`](../contactAngle/bashrc) file making sure it sources
+the OpenFOAM-v1906/etc/bashrc file based on your OpenFOAM installation
 directories.
 
-The mesh generation code requires a recent C++
-compiler, you can set it either in the `voxelImage/Makefile` or by
-setting the variable `CXX` in file `~/works/apps/bashrc`. The default
-(g++) may work and hence you don't need to do any change.
-
-Then open a terminal and type the following commands to compile the
-codes:
+Then open a terminal and type the following commands to compile the codes:
 
 ```  {.bash language="bash"}
-(cd ~/works/apps/contactAngle && ./AllMake) 
+(cd ~/works/contactAngle && ./AllMake) 
 ``` 
 
 Setting the Environmental variables:
@@ -58,7 +46,7 @@ Add the following line to your `~/.bashrc` file (optional but
 recomended),
 
 ```  {.bash language="bash"}
-source ~/works/apps/contactAngle/bashrc
+source ~/works/contactAngle/bashrc
 ``` 
 
 This makes the contact angle and roughness scripts available in any new terminal you open.

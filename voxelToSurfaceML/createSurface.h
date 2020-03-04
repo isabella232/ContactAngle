@@ -73,9 +73,9 @@ void writeSTLBINARY( const voxelMesh & data, std::string outputSurface)
 #define ucount1(type) count3(type)
 
 
-    for (int kk=1;kk<=n1;kk++)
-     for (int jj=1;jj<=n2;jj++)
-       for (int ii=1;ii<=n3;ii++)
+    for (unsigned int kk=1;kk<=n1;kk++)
+     for (unsigned int jj=1;jj<=n2;jj++)
+       for (unsigned int ii=1;ii<=n3;ii++)
     	{
 			unsigned char vv=data[kk][jj][ii];
              if (vv==1 || vv==2)
@@ -182,63 +182,55 @@ faceList faces_Front(nFrontFaces);
 
 
 
-    int iCells=-1;
 
 
     int iAllFaces=-1;
 
-    for (register unsigned int kk=1;kk<=n1;kk++)
-    {
-        for (register unsigned int jj=1;jj<=n2;jj++)
+    for (unsigned int kk=1;kk<=n1;kk++)
+     for (unsigned int jj=1;jj<=n2;jj++)
+      for (unsigned int ii=1;ii<=n3;ii++)
+      {
+			unsigned char vv=data[kk][jj][ii];
+          if (vv==1 || vv==2)
+          {
 
-        {
-            for (register unsigned int ii=1;ii<=n3;ii++)
-            {
-				unsigned char vv=data[kk][jj][ii];
-                if (vv==1 || vv==2)
-                {
-
-                    iCells++;                                                       
-
-					if (ii!=1)                                                                            
-					{                                                                                     
-						if (vv==data[kk][jj][ii-1])    {/*clockwiserecordFaces3( Internal);internal[iface]=true;*/}          
-						else  if(1!=data[kk][jj][ii-1]) {clockwiserecordFaces3( All); fMarks[iAllFaces]=vv+data[kk][jj][ii-1]; }
-					}//else {clockwiserecordFaces3( Back);}                                     
-					if (ii!=n3)                                                               
-					{                                                                         
-						if (vv==data[kk][jj][ii+1])    {/*uclockwiserecordFaces3( Internal);internal[iface]=true;*/}      
-						else if(1!=data[kk][jj][ii+1]){uclockwiserecordFaces3( All); fMarks[iAllFaces]=vv+data[kk][jj][ii+1]; }         
-					}//else {uclockwiserecordFaces3( Front); }                                  
+				if (ii!=1)                                                                            
+				{                                                                                     
+					if (vv==data[kk][jj][ii-1])    {/*clockwiserecordFaces3( Internal);internal[iface]=true;*/}          
+					else  if(1!=data[kk][jj][ii-1]) {clockwiserecordFaces3( All); fMarks[iAllFaces]=vv+data[kk][jj][ii-1]; }
+				}//else {clockwiserecordFaces3( Back);}                                     
+				if (ii!=n3)                                                               
+				{                                                                         
+					if (vv==data[kk][jj][ii+1])    {/*uclockwiserecordFaces3( Internal);internal[iface]=true;*/}      
+					else if(1!=data[kk][jj][ii+1]){uclockwiserecordFaces3( All); fMarks[iAllFaces]=vv+data[kk][jj][ii+1]; }         
+				}//else {uclockwiserecordFaces3( Front); }                                  
 
 
-					if (jj!=1)                                                            
-					{                                                                     
-						if (vv==data[kk][jj-1][ii])    {/*clockwiserecordFaces2( Internal);internal[iface]=true;*/}       
-						else if(1!=data[kk][jj-1][ii]) {clockwiserecordFaces2( All);  fMarks[iAllFaces]=vv+data[kk][jj-1][ii]; }      
-					}//else {clockwiserecordFaces2( Bottom)}                                
-					if (jj!=n2)                                                           
-					{                                                                     
-						if (vv==data[kk][jj+1][ii])    {/*uclockwiserecordFaces2( Internal);internal[iface]=true;*/}            
-						else if(1!=data[kk][jj+1][ii]) {uclockwiserecordFaces2( All);  fMarks[iAllFaces]=vv+data[kk][jj+1][ii]; }     
-					}//else {uclockwiserecordFaces2( Top)}                                  
+				if (jj!=1)                                                            
+				{                                                                     
+					if (vv==data[kk][jj-1][ii])    {/*clockwiserecordFaces2( Internal);internal[iface]=true;*/}       
+					else if(1!=data[kk][jj-1][ii]) {clockwiserecordFaces2( All);  fMarks[iAllFaces]=vv+data[kk][jj-1][ii]; }      
+				}//else {clockwiserecordFaces2( Bottom)}                                
+				if (jj!=n2)                                                           
+				{                                                                     
+					if (vv==data[kk][jj+1][ii])    {/*uclockwiserecordFaces2( Internal);internal[iface]=true;*/}            
+					else if(1!=data[kk][jj+1][ii]) {uclockwiserecordFaces2( All);  fMarks[iAllFaces]=vv+data[kk][jj+1][ii]; }     
+				}//else {uclockwiserecordFaces2( Top)}                                  
 
 
-					if (kk!=1)                                                            
-					{                                                                     
-						if (vv==data[kk-1][jj][ii])    {/*clockwiserecordFaces1( Internal);internal[iface]=true;*/}       
-						else  if(1!=data[kk-1][jj][ii]) {clockwiserecordFaces1( All); fMarks[iAllFaces]=vv+data[kk-1][jj][ii];}      
-					}//else {clockwiserecordFaces1( Left)}                                  
-					if (kk!=n1)                                                           
-					{                                                                     
-						if (vv==data[kk+1][jj][ii])    {/*uclockwiserecordFaces1( Internal);internal[iface]=true;*/}      
-						else  if(1!=data[kk+1][jj][ii]) {uclockwiserecordFaces1( All); fMarks[iAllFaces]=vv+data[kk+1][jj][ii];}         
-					}//else {uclockwiserecordFaces1( Right)}                                    
+				if (kk!=1)                                                            
+				{                                                                     
+					if (vv==data[kk-1][jj][ii])    {/*clockwiserecordFaces1( Internal);internal[iface]=true;*/}       
+					else  if(1!=data[kk-1][jj][ii]) {clockwiserecordFaces1( All); fMarks[iAllFaces]=vv+data[kk-1][jj][ii];}      
+				}//else {clockwiserecordFaces1( Left)}                                  
+				if (kk!=n1)                                                           
+				{                                                                     
+					if (vv==data[kk+1][jj][ii])    {/*uclockwiserecordFaces1( Internal);internal[iface]=true;*/}      
+					else  if(1!=data[kk+1][jj][ii]) {uclockwiserecordFaces1( All); fMarks[iAllFaces]=vv+data[kk+1][jj][ii];}         
+				}//else {uclockwiserecordFaces1( Right)}                                    
 
-                }
-            }
-        }
-    }
+           }
+         }
 
 
 //______________________________________________
@@ -306,10 +298,10 @@ Info<<endl;
 		Info<<zoneSizes[0]<<" + "<<zoneSizes[1]<<" + "<<zoneSizes[2]<<" = "<<indF+1<<endl;
     
     
-        Xfer<List<face> > facesFer(facesSorted_All,true);
-        Field<point> & pointsSF=points;
-        Xfer<Field<point> > pointsFer(pointsSF,true);
-        meshedSurface surf1(pointsFer, facesFer, zoneSizes);
+        //Xfer<List<face> > facesFer(facesSorted_All,true);
+        //Field<point> & pointsSF=points;
+        //Xfer<Field<point> > pointsFer(pointsSF,true);
+        meshedSurface surf1(points, facesSorted_All, zoneSizes);
 		//~ surf1.addZones();
         //~ surf.triangulate ();
 
@@ -354,7 +346,7 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
 	const labelListList& pEdges = surf1.pointEdges();
 	const labelListList& eFaces = surf1.edgeFaces();
 	const List<edge>& edges = surf1.edges();
-	const List<face>& faces = surf1.faces();
+	const List<face>& faces = surf1.surfFaces();
 	const pointField& points = surf1.points();
 	const labelList& meshPoints = surf1.meshPoints();
   forAll(group1, gfI)
@@ -448,15 +440,15 @@ void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points,
     label nProblemPoints = 0;
 
 
-	Xfer<List<face> > facesFer(faces,false);
+	//Xfer<List<face> > facesFer(faces,false);
 	//~ Field<point> & pointsSF=points;
-	Xfer<Field<point> > pointsFer(points,false);
-	MeshedSurface<face> surf1(pointsFer, facesFer);
+	//Xfer<Field<point> > pointsFer(points,false);
+	MeshedSurface<face> surf1(points, faces);
 
 	const labelListList& pFaces = surf1.pointFaces();
 	const labelList& meshPoints = surf1.meshPoints();
 
-	const List<face>& Sfaces = surf1.faces();
+	const List<face>& Sfaces = surf1.surfFaces();
 
 
 

@@ -83,19 +83,6 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
     fileName outFileName(smoothingDict.lookup("outputSurface"));
 
     
-    //~ label kernelRadius(readLabel(smoothingDict.lookup("kernelRadius")));
-    //~ label iters(readLabel(smoothingDict.lookup("nIterations"))); 
-    //~ scalar relax(readScalar(smoothingDict.lookup("relaxationFactor")));
-    //~ if ((relax <= 0) || (relax > 1))
-			//~ FatalErrorIn(args.executable()) << "Illegal relaxation factor " << relax
-             //~ << endl << "0: no change 1: move vertices to average of neighbours" << exit(FatalError);
-    //~ Info<< "Relax:" << relax << endl;
-    //~ Info<< "kernel radius:" << kernelRadius << endl;
-    //~ Info<< "Iters:" << iters << endl;
-
-
-
-
 
 
 
@@ -114,10 +101,9 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
 
     #define labelLoop face
-		#define nextLabelInLoop(list,i)  (i<list.size()-1 ? list[i+1] : list[0])
 
     const pointField & points=surf123.points();
-    const List<face> & faces=surf123.faces();
+    const List<face> & faces=surf123.surfFaces();
     DynamicList<DynamicList<label> > pointPointsTmp(points.size());
     List<labelLoop> pointPoints(points.size());
     forAll(faces,faceI)
@@ -129,14 +115,11 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
            appendUnique(pointPointsTmp[ f[pI] ], f.prevLabel(pI));
         }
     }
-    //~ Info<<"\n........"<<endl<<endl ;
 
     forAll(pointPoints,i)
     {
-        pointPoints[i].setSize(pointPoints[i].size());
+        //pointPoints[i].setSize(pointPointsTmp[i].size());
         pointPoints[i]=face(pointPointsTmp[i]);
-
-    //~ Info<<pointPoints[i].size()<<" "<<i<<" "<<pointPoints[i]<<endl ;
     }
 
     pointField newPoints(points);
@@ -216,13 +199,6 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
 	}
 
-//~ pWeights=1.0;
-
-
-
-
-
-
 
 
 
@@ -239,30 +215,35 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
 
 	{ 
+		Info<< "volume preserving Gaussian smoothing"<< endl;
+		Info<< "Reading keywords from system/meshingDict -> surfaceSmoothing:"<< endl;
+		label nIters(readLabel(smoothingDict.lookup("nIterationsGaussVP")));
 		label kernelRadius(readLabel(smoothingDict.lookup("kernelRadiusGaussVP")));
-		label iters(readLabel(smoothingDict.lookup("nIterationsGaussVP")));
 		scalar relax(readScalar(smoothingDict.lookup("relaxFactorGaussVP")));
 		scalar relaxCL(readScalar(smoothingDict.lookup("relaxFactorGaussVPCL")));
-
 		if ((relax < 0) || (relax > 1))
 				FatalErrorIn(args.executable()) << "Illegal relaxation factor " << relax
 				 << endl << "0: no change 1: move vertices to average of neighbours" << exit(FatalError);
-		Info<< "Relax:" << relax << endl;
-		Info<< "Relax CL:" << relaxCL << endl;
-		Info<< "kernel radius:" << kernelRadius << endl;
-		Info<< "Iters:" << iters << endl;
+		Info<< "   nIterationsGaussVP:  " << nIters << endl;
+		Info<< "   kernelRadiusGaussVP: " << kernelRadius << endl;
+		Info<< "   relaxFactorGaussVP:  " << relax << endl;
+		Info<< "   relaxFactorGaussVPCL:" << relaxCL << endl;
 
 
-		for(label iter = 0; iter < iters; iter++)
+		for(label iter = 0; iter < nIters; iter++)
 		{
 			#include "./gauss.H"
 		}
-		Info<<"smoothed  :/"<<endl<<endl;
+		Info<<"Gasss smoothed  :/"<<endl<<endl;
 	}//===================================================================================
 
+
+
 	{ 
+		Info<< "curvature move/smoothing 1"<< endl;
+		Info<< "Reading keywords from system/meshingDict -> surfaceSmoothing:"<< endl;
+		label nIters(readLabel(smoothingDict.lookup("nIterationsCurvature1")));
 		label kernelRadius(readLabel(smoothingDict.lookup("kernelRadiusCurvature1")));
-		label iters(readLabel(smoothingDict.lookup("nIterationsCurvature1")));
 		scalar relax(readScalar(smoothingDict.lookup("relaxFactorCurvature1")));
 		scalar relaxCL(readScalar(smoothingDict.lookup("relaxFactorCurvature1CL")));
 
@@ -273,22 +254,23 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 				FatalErrorIn(args.executable()) << "Illegal CL relaxation factor " << relaxCL
 				 << endl << "0: no change 1: move vertices to average of neighbours" << exit(FatalError);
 		
-		Info<< "Relax:" << relax << endl;
-		Info<< "Relax CL:" << relaxCL << endl;
-		Info<< "kernel radius:" << kernelRadius << endl;
-		Info<< "Iters:" << iters << endl;
+		Info<< "  nIterationsCurvature1:   " << nIters << endl;
+		Info<< "  kernelRadiusCurvature1:  " << kernelRadius << endl;
+		Info<< "  relaxFactorCurvature1:   " << relax << endl;
+		Info<< "  relaxFactorCurvature1CL: " << relaxCL << endl;
 
 
-		for(label iter = 0; iter < iters; iter++)
+		for(label iter = 0; iter < nIters; iter++)
 		{
 			#include "./curvatureMove.H"
 		}
 		Info<<"smoothed  :/"<<endl<<endl;
 	}//===================================================================================
 
-	{ 
+	{
+ 		Info<< "curvature move/smoothing, second round"<< endl;
+		label nIters(readLabel(smoothingDict.lookup("nIterationsCurvature")));
 		label kernelRadius(readLabel(smoothingDict.lookup("kernelRadiusCurvature")));
-		label iters(readLabel(smoothingDict.lookup("nIterationsCurvature")));
 		scalar relax(readScalar(smoothingDict.lookup("relaxFactorCurvature")));
 		scalar relaxCL(readScalar(smoothingDict.lookup("relaxFactorCurvatureCL")));
 
@@ -299,39 +281,19 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 				FatalErrorIn(args.executable()) << "Illegal CL relaxation factor " << relaxCL
 				 << endl << "0: no change 1: move vertices to average of neighbours" << exit(FatalError);
 		
-		Info<< "Relax:" << relax << endl;
-		Info<< "Relax CL:" << relaxCL << endl;
-		Info<< "kernel radius:" << kernelRadius << endl;
-		Info<< "Iters:" << iters << endl;
+		Info<< "  nIterationsCurvature:   " << nIters << endl;
+		Info<< "  kernelRadiusCurvature:  " << kernelRadius << endl;
+		Info<< "  relaxFactorCurvature:   " << relax << endl;
+		Info<< "  relaxFactorCurvatureCL: " << relaxCL << endl;
 		
 
-		for(label iter = 0; iter < iters; iter++)
+		for(label iter = 0; iter < nIters; iter++)
 		{
 			#include "./curvatureMove.H"
 		}
 		Info<<"smoothed  :/"<<endl<<endl;
 	}//===================================================================================
 
-	//{ 
-		//label kernelRadius(readLabel(smoothingDict.lookup("kernelRadiusRoughness")));
-		//label iters(readLabel(smoothingDict.lookup("nIterationsCurvature")));
-		//scalar relax(readScalar(smoothingDict.lookup("relaxFactorCurvature")));
-
-		//if ((relax < 0) || (relax > 1))
-				//FatalErrorIn(args.executable()) << "Illegal relaxation factor " << relax
-				 //<< endl << "0: no change 1: move vertices to average of neighbours" << exit(FatalError);
-		
-		//Info<< "Relax:" << relax << endl;
-		//Info<< "kernel radius:" << kernelRadius << endl;
-		//Info<< "Iters:" << iters << endl;
-
-
-		//for(label iter = 0; iter < iters; iter++)
-		//{
-			//#include "./wallRoughness.H"
-		//}
-		//Info<<"Wall roughness calculated  :/"<<endl<<endl;
-	//}//===================================================================================
 
 
 
@@ -343,22 +305,14 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
     Info<< "Writing surface to " << outFileName << " ..." << endl;
 
 
-
-   //~ surf123.write(outFileName+".obj");
-
 	#include "./calcContAngle.H"
 	//~ #include "./calcCurvature.H"
-
-  //~ Info<<"triangulating the surface before write"<<endl;
-    //~ surf123.triangulate();
-
-
 
 
 
     surf123.write(outFileName);
 
-	runTime.write();
+
 	Info << "\n"<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
 	<< " ClockTime = " << runTime.elapsedClockTime() << " s"
 	<< "\n" << endl;

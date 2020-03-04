@@ -1,10 +1,11 @@
 # .bashrc
 
-I_DIR=$HOME/works/bin-v16
+I_DIR=$HOME/works/bin
 
 
 # Change according to your openfoam installation directory
-source ~/OpenFOAM/OpenFOAM-v1606+/etc/bashrc 
+#source ~/OpenFOAM/OpenFOAM-v1606+/etc/bashrc 
+source /opt/OF/OpenFOAM-v1906/etc/bashrc
 
 export I_DIR
 export myBinDir=$I_DIR/bin

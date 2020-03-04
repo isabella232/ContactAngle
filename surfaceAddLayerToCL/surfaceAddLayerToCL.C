@@ -27,13 +27,11 @@ Description
 
 
 
-//~ #include "triSurface.H"
-#include "MeshedSurfaces.H"
-
 #include "argList.H"
 #include "OFstream.H"
 #include "boundBox.H"
 #include "DynamicField.H"
+#include "MeshedSurfaces.H"
 
 using namespace Foam;
 
@@ -69,7 +67,7 @@ int main(int argc, char *argv[])
 
     meshedSurface surf123(surfFileName);
 
-	const faceList &   faces = surf123.faces();
+	const faceList &   faces = surf123.surfFaces(); 
 	const pointField &   points = surf123.points();
 
 
@@ -256,12 +254,12 @@ int main(int argc, char *argv[])
   		Info<<points.size()<<" ps?<= "<<pointsAll.size()<<"      "<<faces.size()<<" fs?<= "<<facesSorted_All.size()<<endl;
 
 		/// convert to openfoam weired data pointers
-        Xfer<List<face> > facesFer(facesSorted_All,true);
-        Field<point> & pointsSF=pointsAll;
-		Xfer<Field<point> > pointsFer(pointsSF,true);
+     //   Xfer<List<face> > facesFer(facesSorted_All,true);
+    //    Field<point> & pointsSF=pointsAll;
+	//	Xfer<Field<point> > pointsFer(pointsSF,true);
 
 
-        meshedSurface surfOut(pointsFer, facesFer, zoneSizes);
+        meshedSurface surfOut(pointsAll, facesSorted_All, zoneSizes);
 
         surfOut.write(outFileName);
 

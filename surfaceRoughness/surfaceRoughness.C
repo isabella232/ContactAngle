@@ -103,7 +103,7 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
     #define labelLoop face
 
     const pointField & points=surf123.points();
-    const List<face> & faces=surf123.faces();
+    const List<face> & faces=surf123.surfFaces();
     DynamicList<DynamicList<label> > pointPointsTmp(points.size());
     List<labelLoop> pointPoints(points.size());
     forAll(faces,faceI)
@@ -118,7 +118,7 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
     forAll(pointPoints,i)
     {
-        pointPoints[i].setSize(pointPoints[i].size());
+        //pointPoints[i].setSize(pointPointsTmp[i].size());
         pointPoints[i]=face(pointPointsTmp[i]);
     }
 
@@ -160,7 +160,7 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 		Info<< "pMarks     : " << min(pMarks)<<" - "<< max(pMarks)<< endl;
 		Info<<"........"<<endl<<endl ;
 
-	
+
 
 
 
