@@ -1,3 +1,5 @@
+***This fork currently does not work due to an I/O incompatibility in openfoam, use [original code](https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness) instead***
+
 <img align="right" width="50%" height="50%" src="https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness/blob/master/docs/Fig2.png"/>
 
 # ContactAngle-Curvature-Roughness
