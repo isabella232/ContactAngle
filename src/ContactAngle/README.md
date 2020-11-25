@@ -37,7 +37,10 @@ If the `IMAGE.mhd` argument is not provided, it is set to all .mhd files in the 
 
 Do not run the script directly from the tutorial nor the src folder, run it from a clean folder to avoid overwriting files etc.
 
-## Input data format -- 
+
+
+
+## Input data format 
 
 ***The following notes are relavant only if you do not want to use the AllRunCA script mentioned above, or want to revise the input parameters***
 
