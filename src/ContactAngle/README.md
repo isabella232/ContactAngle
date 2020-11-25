@@ -12,7 +12,7 @@ In the following, this document is organized into three sections. First is **Ins
 
 
 # Installation
-see the upper forlder README.md file.  For prerequisites, please see the [porefoam README file](https://github.com/aliraeini/poreFoam-singlePhase/blob/master/src/porefoam1f/README.md)
+see the upper forlder README.md file.  For prerequisites, please see the [porefoam README file](https://github.com/aliraeini/poreFoam-singlePhase/blob/master/src/porefoam1f/README.md).
 
 Setting the Environmental variables:
 ------------------------------------
