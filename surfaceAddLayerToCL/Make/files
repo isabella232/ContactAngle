@@ -1,3 +1,0 @@
-surfaceAddLayerToCL.C
-
-EXE = $(myBinDir)/surfaceAddLayerToCL

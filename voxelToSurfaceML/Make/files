@@ -1,3 +1,0 @@
-voxelToSurface.C
-
-EXE = $(myBinDir)/voxelToSurfaceML

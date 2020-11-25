@@ -1,4 +1,0 @@
-
-calcContactAngleUnifKc.C
-
-EXE = $(myBinDir)/calcContactAngleUnifKc

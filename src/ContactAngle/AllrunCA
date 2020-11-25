@@ -1,0 +1,45 @@
+#!/bin/bash
+#set -ex
+
+#~ ImageNames=" BLSWa_8bit_500_500_500   "
+ImageNames=$(ls *.mhd | sed 's/.mhd//g')
+echo $ImageNames
+
+################
+
+
+#msSrc=/opt/contactAngleAhmedAlratrout2017/apps
+#source $msSrc/contactAngle/bashrc
+# Figure out Paths assuming this file is in src/ContactAngle folder
+myCurrentDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/../../src" && pwd )
+: ${msSrc:=$myCurrentDIR} ; export msSrc
+[ -n "$WM_PROJECT" ] || echo "WM_PROJECT not set, sourcing $msSrc/script/bashrc"
+[ -n "$WM_PROJECT" ] || source $msSrc/script/bashrc
+
+
+for ImageName in $ImageNames ; do
+ echo "analysing $ImageName"
+ if [ -d $ImageName ] ; then 
+   echo "folder $ImageName exist, delete to rerun"
+ else
+   mkdir $ImageName
+   if [ -d system ]; then cp -r system $ImageName/;
+   else                   cp -r $msSrc/ContactAngle/tutorial/system $ImageName/; fi
+   
+   cp $ImageName.* $ImageName/
+
+   sed -i 's/subvolume/'"$ImageName"'/g' $ImageName/system/meshingDict
+
+
+
+   echo "(cd $ImageName/ && voxelToSurfaceML) "
+
+  (cd $ImageName/ && voxelToSurfaceML )
+  (cd $ImageName/ && surfaceAddLayerToCL)
+  (cd $ImageName/ && calcContactAngleUnifKc )
+  (cd $ImageName/ && more contactAngles.txt >>Kc.txt)
+  (cd $ImageName/ && more Kc.txt >> *_Layered_Smooth.vtk)
+
+ fi
+done
+

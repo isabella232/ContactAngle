@@ -1,3 +1,17 @@
+
+Make/*/
+bin/*
+build/*
+*.log
+log.*
+*-.cpp
+*-
+*/lnInclude
+
+#latex
+*.aux
+*.toc
+
 # Prerequisites
 *.d
 

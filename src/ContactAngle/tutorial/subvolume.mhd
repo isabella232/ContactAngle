@@ -1,0 +1,13 @@
+ObjectType =  Image
+NDims =       3
+ElementType = MET_UCHAR
+
+DimSize =     105 97 126
+ElementSize = 2   2   2 
+Offset =      0   0   0
+
+ElementDataFile = subvolume.raw.gz
+
+
+
+Unit = 1
