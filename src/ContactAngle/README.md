@@ -1,4 +1,4 @@
-***This is an experimental fork of [the geometrical contact measurement code](https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness) and needs further testing, use at your own risk***
+***This is an experimental fork of the [automatic contact angle measurement code by AlRatrout et al (2017)](https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness) and needs further testing, use at your own risk***
 
 <img align="right" width="50%" height="50%" src="https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness/blob/master/docs/Fig2.png"/>
 
