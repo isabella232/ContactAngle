@@ -33,7 +33,7 @@ Prepare your image as in the tutorial folder ( a .mhd header file and the image 
 ```  {.bash language="bash"}
 PATH/TO/src/ContactAngle/AllRunCA  IMAGE.mhd
 ``` 
-If the `IMAGE.mhd` argument is not provided, it is set to all .mhd files in the directory of the running termnal.
+If the `IMAGE.mhd` argument is not provided, the script will run for all the `.mhd` files located in the working directory of your termnal.
 
 Do not run the script directly from the tutorial nor the src folder, run it from a clean folder to avoid overwriting files etc.
 
