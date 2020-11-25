@@ -1,4 +1,4 @@
-***This fork is not tested, use [original code](https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness) instead***
+***This is an experimental fork of [the geometrical contact measurement code](https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness) and needs further testing, use at your own risk***
 
 <img align="right" width="50%" height="50%" src="https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness/blob/master/docs/Fig2.png"/>
 
@@ -12,34 +12,12 @@ In the following, this document is organized into three sections. First is **Ins
 
 
 # Installation
-
-## Prerequisites
-
-see prerequisites for [](thirdparty/foam3xm)
-
-## Downloading and extracting files
-Create a directory in your home (`~`) folder named "works" and extract/download the codes inside it in a folder named contactAngle. You can choose any other folder and the scripts will work, but this ducument assumes you install the codes in "`~/works/contactAngle`" folder.
-
-To check that the directories are created 
-correctly, type in a terminal:
-
-```{.bash language="bash"}
-#  Important: replace ~/works/contactAngle with the 
-#  directory in which you have extracted the codes 
-ls  ~/works/contactAngle/voxelImage
-```
-
-and it should not show the error message `No such file or directory`.
-
-## Compiling the codes
-
-Check out the [](../README.md) file.
+see the upper forlder [README.md](../README.md) file
 
 Setting the Environmental variables:
 ------------------------------------
 
-Add the following line to your `~/.bashrc` file (optional but
-recomended),
+Add the following line to your `~/.bashrc` file (optional but recomended),
 
 ```  {.bash language="bash"}
 source PATH/TO/src/script/bashrc
@@ -50,18 +28,30 @@ This makes the contact angle and roughness scripts available in any new terminal
 
 # Usage
 
-## Input file format
+Prepare your image as in the tutorial folder ( a .mhd header file and the image data in .raw or .raw.gz or .tif or .am format).  Then run, in the same folder:
+
+```  {.bash language="bash"}
+PATH/TO/src/ContactAngle/AllRunCA  IMAGE.mhd
+``` 
+If the `IMAGE.mhd` argument is not provided, it is set to all .mhd files in the directory of the running termnal.
+
+Do not run the script directly from the tutorial nor the src folder, run it from a clean folder to avoid overwriting files etc.
+
+## Input data format -- 
+
+***The following notes are relavant only if you do not want to use the AllRunCA script mentioned above, or want to revise the input parameters***
 
 The following required input files are provided in `docs/Example`:
 
 1.  Segmented dataset from 3D multiphase images (i.e. Micro-CT) should be given in ascii (suffix should be `.dat`)
-    or binary files (better to have `.raw` suffix, the data should be in
-    8bit unsigned char). For contact angle and oil/brine interface curvature - the voxel values of the segmented phases are required to be in the following: oil = 2, rock (solid) = 1 and brine = 0. The contact angle is measured through the brine phase (voxel value = 0). An example is provided in `docs/Example/Carbonate1_WW.raw`, which is a binary segmented image cropped from Sample-1 image available on Digital Rocks Portal website:
-<https://www.digitalrocksportal.org/projects/151>. For measuring roughness - it is required to be applied on dry images (contain solid phase only). The voxel values of the segmented dry image should be solid = 1 and brine (or air) = 0.
-    
-2.  Input header file: to declare the number of voxels in the three dimensions (x, y and z), the voxel dimensions (x, y and z) in microns and the offset distance (0 0 0 for no shifting). Rename the header file as the image file.
+    or binary files (better to have `.raw` or .raw.gz or .am suffix, the data should be in
+    8bit unsigned char). For contact angle and oil/brine interface curvature - the voxel values of the segmented phases should be: oil = 2, rock (solid) = 1 and brine = 0. The contact angle is measured through the brine phase (voxel value = 0). An example is provided in `tutorial/subvolume` folder, which is a binary segmented image cropped from Sample-1 image available on Digital Rocks Portal website:
+<https://www.digitalrocksportal.org/projects/151> and compressed in .gz format. 
 
-3.  A sub-directory called `system` to comply with the basic directory structure for an OpenFOAM case. Make sure that there are two files (`controlDict` file and `meshingDict` file) in the system folder that contain the setting parameters.
+For measuring roughness - it is required to be applied on dry images (contain solid phase only). The voxel values of the segmented dry image should be solid = 1 and brine (or air) = 0.  THIS HAS NOT BEEN TESTED IN THIS FORKED REPOSITORY AT ALL.
+ 
+
+2.  A sub-directory called `system` to comply with the basic directory structure for an OpenFOAM case. Make sure that there are two files (`controlDict` file and `meshingDict` file) in the system folder that contain the setting parameters.
 Note: the `controlDict` file is where run control parameters are set including start/end time. The `meshingDict` file is where the input and output files in each step of the algorithm is specified.
 
 ## Running the contact angle and fluid/fluid interface curvature code
@@ -158,6 +148,9 @@ The developed algorithm for measuring surface roughness and its relationship to 
 
 
 ## COPYRIGHT
-The code is released subject to terms and conditions of  GNU GENERAL
-PUBLIC LICENSE Version 3, see: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+The ContactAngle and libvoxel codes provided here are released under the terms and conditions of  GNU GENERAL
+PUBLIC LICENSE Version 3 (GPLv3), see: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+Codes in the thirdparty firectory has their own licence terms. For the foamx3m (GPLv3 licence) you need to check individual files -- they are mostly derived from foam-extend but some of the files are updated using codes from OpenFOAM-v16.12+ or more recent versions of official OpenFOAM (released b OpenCFD) and include cfMesh code as well. These codes are in some cases are costomized and are not endorsed by their original copy-right holders.
 
