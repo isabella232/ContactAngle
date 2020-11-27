@@ -35,9 +35,10 @@ Mind the fact that this is a research code. You need to know what the code is do
 
 - The micro-CT image should have a high resolution and the resolution should be roughly the same as the voxel size.  In some cases, you may need to coarsen the image by a factor of two to achieve this.  This can be done by adding a keyword `resampleMode 2` in a new line at the end of the .mhd file (this coarsens the image assigning to each voxel the mode value of the smaller voxels. It works for this code which uses libvoxel, not the [original] version which uses an old voxelImage library for reading the image).
 
+This code applies a set of slightly different (limited) filters before extracting the surfaces (mode instead of median) and can have slightly different behaviour, but the difference should be negligible.  These filters are meant to filter out problematic voxels and have a very small effect on the over smoothness of the surfaces extracted. Additional filters can be applied, for example, through the use of modeFilter keyword in the input .mhd file to remove  image noise artefacts, but excessive filtering can introduce more artefacts than it suppresses. 
 
 
----------------------------------------
+______________________________________________
 
 
 **The following notes are relevant only if you do not want to use the AllRunCA script mentioned above, or want to revise the input parameters**
@@ -53,7 +54,7 @@ The following required input files are provided in `docs/Example`:
     8bit unsigned char). For contact angle and oil/brine interface curvature - the voxel values of the segmented phases should be: oil = 2, rock (solid) = 1 and brine = 0. The contact angle is measured through the brine phase (voxel value = 0). An example is provided in `tutorial/subvolume` folder, which is a binary segmented image cropped from Sample-1 image available on Digital Rocks Portal website:
 <https://www.digitalrocksportal.org/projects/151> and compressed in .gz format. 
 
-For measuring roughness - it is required to be applied on dry images (contain solid phase only). The voxel values of the segmented dry image should be solid = 1 and brine (or air) = 0.  THIS HAS NOT BEEN TESTED IN THIS FORKED REPOSITORY, YOU MAY NEED TO CHECK OUT THE ORIGINAL REPOSITORY.
+For measuring roughness - it is required to be applied on dry images (contain solid phase only). The voxel values of the segmented dry image should be solid = 1 and brine (or air) = 0.  THIS HAS NOT BEEN TESTED IN THIS FORKED REPOSITORY, YOU MAY NEED TO CHECK OUT THE [ORIGINAL] REPOSITORY.
  
 
 2.  A sub-directory called `system` to comply with the basic directory structure for an OpenFOAM case. Make sure that there are two files (`controlDict` file and `meshingDict` file) in the system folder that contain the setting parameters.
@@ -163,5 +164,5 @@ Codes in the thirdparty directory has their own licence terms. For the foamx3m (
 
 
 
-[original]:(https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness)
-[ORIGINAL]:(https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness)
+[original]: (https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness)
+[ORIGINAL]: (https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness)
