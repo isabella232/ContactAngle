@@ -31,7 +31,7 @@ Do not run the script directly from the tutorial nor the src folder, run it from
 
 Mind the fact that this is still a research code. In other words you need to know what the code is doing and set the parameters correctly to get optimum results. 
 
-- You need to monitor the output of the code and set the number of smoothing iteration to a value that the code does not diverge.  This is done through adjusting the `nIterationsCurvature1` and `nIterationsCurvature` in the system folder.   The reported values for face areas (`A`), curvature (`k) and displacements (`DispMag`) should not increase as the code applies the curvature smoothing iterations.
+- You need to monitor the output of the code and set the number of smoothing iteration to a value that the code does not diverge.  This is done through adjusting the `nIterationsCurvature1` and `nIterationsCurvature` in the system folder.   The reported values for face areas (`A`), curvature (`k`) and displacements (`DispMag`) should not increase as the code applies the curvature smoothing iterations.
 
 - The micro-CT image should have a high resolution and the resolution should be ideally the same as the voxel size, roughly speaking.  In other words, you may need to coarsen the image by a factor of two to achieve this.  This can be achived by adding a keyword `resampleMode 2` in a new line at the end of the .mhd file (this coarsens the image assigning to each voxel the mode value of the smaller voxels. It works for this code which uses libvoxel, not the [original] version which uses an old voxelImage library for reading the image).
 
