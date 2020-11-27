@@ -83,9 +83,10 @@ Note: Here the extracted file from the previous step is used as an input file (\
 Note: In this step, the output file from the previous step (\*\_Layered.vtk) is used as an input mesh to apply the smoothing algorithm. The name of the smoothed output file (\*\_Layered\_Smooth.vtk) is specified. In this step, a volume-preserving Gaussian smoothing is applied on mesh _M_, and then a volume-preserving curvature uniform smoothing is applied, which is consistent with capillary equilibrium. Two output files (Kc_x.txt and Kc.txt) are specified. The file Kc_x.txt contains the curvature values of the vertices belonging to the oil/brine interface (_i_ ∈ _V_<sub>_OB_</sub>) and their spatial location coordinates.
 
 4. Contact angle measurement.
-Note: The contact angle is computed on each vertex that belongs to the contact line set, i ∈ _V_<sub>_CL_</sub>. The contact angle (\theta <sub>_i_</sub>)for each vertex is calculated through the brine phase by:
-<!-- \theta_i = \pi - \acos (\textbf{n}_i|_{\textbf{z}_2} \cdot \textbf{n}_i|_{\textbf{z}_3}),   i \in V_{CL} -->
-<img src="http://latex.codecogs.com/svg.latex?\theta_i=\pi-\cos^{-1}(\textbf{n}_i|_{\textbf{z}_2}\cdot\textbf{n}_i|_{\textbf{z}_3}),$\quad$i$\in$V_{_{CL}}" border="0"/>
+Note: The contact angle is computed on each vertex that belongs to the contact line set, i ∈ _V_<sub>_CL_</sub>. The contact angle (\theta <sub>_i_</sub>)for each vertex is calculated through the brine phase by:     
+<!-- \theta_i = \pi- \acos (\textbf{n}_i|_{\textbf{z}_2}\cdot\textbf{n}_i|_{\textbf{z}_3}),   i \in V_{CL} -->       
+<img src="http://latex.codecogs.com/svg.latex?\theta_i=\pi-\cos^{-1}(\textbf{n}_i|_{\textbf{z}_2}\cdot\textbf{n}_i|_{\textbf{z}_3}),~~~~i\in{V_{CL}}" border="0"/>     
+
 The normal vectors are computed on the vertices comprising the contact line, i ∈ _V_<sub>_CL_</sub>. Each vertex is represented with two vectors normal to the oil/brine interface (**z**<sub>2</sub>) and the brine/rock interface (**z**<sub>3</sub>), as shown in abstract figure.
 
 ## Running the surface roughness code
