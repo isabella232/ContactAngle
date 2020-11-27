@@ -37,9 +37,11 @@ Mind the fact that this is still a research code. In other words you need to kno
 
 
 
-***The following notes are relevant only if you do not want to use the AllRunCA script mentioned above, or want to revise the input parameters***
-
 ---------------------------------------
+
+
+The following notes are relevant only if you do not want to use the AllRunCA script mentioned above, or want to revise the input parameters
+
 
 ## Input data format 
 
