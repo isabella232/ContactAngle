@@ -7,7 +7,7 @@ The code is restructured and built on top of libvoxel (version 2020), and foam3x
 This simplifies installation by removng the dependancy on official openfoam. 
 Additionally it provides further flexibility on the input image format through the use of the [libvoxel](src/libvoxel) library.
 
-Currently there is no `test` case developed for the ContactAngle code, so the make test below will not codes in this folder.
+Currently there is no `test` case developed for the ContactAngle code, so the make test below will not work here.
  
 See also README files for other modules  which are located in their own directories. 
 
