@@ -2,9 +2,10 @@
 
  ----------------------------------------------------------------    
 
-This is a fork of https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness (2017)
+This is a fork of https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness (2017)    
+
 The code is restructured and built on top of libvoxel (version 2020), and foam3xm -- minified (open)foam-extend library.
-This simplifies installation by removng the dependancy on official openfoam. 
+This simplifies installation by removng the dependancy on official openfoam.  The algorithm is kept identical to the original code.
 Additionally it provides further flexibility on the input image format through the use of the [libvoxel](src/libvoxel) library.
 
 Currently there is no `test` case developed for the ContactAngle code, so the make test below will not work here.
@@ -37,6 +38,9 @@ Compilation requires gnu (Linux) make, cmake, a c++ compiler with -std=c++11
 support and an MPI. The compilation is tested using g++ (version 5+) (default)
 and using intel-2018 compilers.
 
+You need to temporarily **deactivate any other OpenFOAM you have on your machine** 
+***when compiling*** this code to avoid conflict between the foam3m provided here 
+and your openfoam instalation.
 
 ### Tests and demos
 To test the codes type:
