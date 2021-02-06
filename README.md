@@ -1,3 +1,5 @@
+![make_and_test](https://github.com/aliraeini/ContactAngle-Curvature-Roughness/workflows/make_and_test/badge.svg)
+
 ##  See  [src/ContactAngle](src/ContactAngle) for more specific details.
 
  ----------------------------------------------------------------    
