@@ -1,4 +1,5 @@
-name: make_and_test
+
+name: make and test
 
 on:
   push:
@@ -13,14 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
     - name: Cache lib
       uses: actions/cache@v2
       with:
-        path: |
-          ~/lib
+        path: lib
         key: ${{ runner.os }}-lib
 
+    - name: install prerequisites
+      run: sudo apt install mpi-default-dev flex libscotch-dev
     - name: make
       run: make -j
     - name: test
