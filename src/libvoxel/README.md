@@ -8,7 +8,14 @@ In addition, voxelImageConvert and voxelToFoam(Par) applications are included he
 
 The library can read raw data in ascii (.dat) or binary (.raw) formats, in Avizo (.am) formats (only uncompressed and ByteRLE encoded data are supported).  It can also read raw.gz and .tif image formats provided that the  [libz] and [libtiff] libraries are available.
 
-### Instructions
+### Usage
+
+This library is used to read 3D image files from other codes, however the standalone app `voxelImageConvert`, which solely acts as an interface to libvoxel, can be used to print help messages about the keywords supported by libvoxel:
+
+   `voxelImageConvert -h`
+
+
+### Compile instructions
 
 #### pre-requisites:
 
