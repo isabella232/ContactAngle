@@ -9,9 +9,9 @@ See also README files for other modules  which are located in their own director
  ----------------------------------------------------------------    
 
 This is a fork of https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness (2017).
-The code is restructured and built on top of a more recent libvoxel (version 2020) library and foam3xm -- minified (open)foam-extend library.
+The code is restructured and built on top of a more recent [libvoxel](src/libvoxel) (version 2020) library and foam3xm -- minified (open)foam-extend library.
 This simplifies installation by removng the dependancy on official openfoam.
-Additionally it provides further flexibility on the input image format through the use of the [libvoxel](src/libvoxel) library.
+Additionally it provides further flexibility on the input image format through the use of the libvoxel library.
 The algorithms, however, are kept identical to the original code.
 
  ----------------------------------------------------------------
