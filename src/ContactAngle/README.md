@@ -3,9 +3,11 @@
 <img align="right" width="50%" height="50%" src="https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness/blob/master/docs/Fig2.png"/>
 
 # ContactAngle-Curvature-Roughness
+
 Automatic measurements of contact angle, interfacial curvature and surface roughness in pore-scale 3D-images
 
 ## Summary
+
 This document presents the implementation of codes and scripts and the instructions for using them to run the automatic measurements of contact angle, fluid/fluid interface curvature and solid surface roughness applied on segmented 3D pore-space images. This package, when installed, performs surface extraction between contact phases, smoothing the extracted surface, measuring the distributions of contact angle, fluid/fluid interface curvature and solid roughness.
 
 In the following, this document is organized into three sections. First is **Installation**, where the user can understand how to install and compile the code on his workstation. Next is **Usage**, where the user is guided how prepare his input data, run the code to analyze his input data and visualize the final results. Finally is **Citations**, here the user is refereed for publications related to this work for more additional details.
@@ -13,9 +15,9 @@ In the following, this document is organized into three sections. First is **Ins
 
 # Installation
 
-See the upper forlder README.md file.  For installing prerequisites, please see the [porefoam README file](https://github.com/aliraeini/poreFoam-singlePhase/blob/master/src/porefoam1f/README.md).
+For build instruction, see [../../script/README.md](https://github.com/aliraeini/ContactAngle/blob/master/src/script/README.md).
 
-Note: most openfoam codes does not fully support the surface zones required by this code and can not by used instead of the provided foamx3m provided in the thirdparty folder.  You can mix this with porefoam codes, but again use the foamx3m used in this repository (newer than 2020-11).
+Note: Not all OpenFOAM codes support the surface zones required by this code and can not be used instead of the foamx3m provided in the thirdparty folder.
 
 
 # Usage
@@ -25,7 +27,7 @@ Prepare your image as in the tutorial folder ( a .mhd header file and the image 
 ```  {.bash language="bash"}
 PATH/TO/src/ContactAngle/AllRunCA  IMAGE.mhd
 ``` 
-If the `IMAGE.mhd` argument is not provided, the script will run for all the `.mhd` files located in the working directory of your terminal.  If a system folder is available in current directory of the terminal, it will be used, otherwise the the system folder is copied from the one in tutorial folder.   SO if you want to modify the code settings, you can copy the system folder from the tutorial folder to current directory: `cp PATH/TO/src/ContactAngle/tutorial/system .`
+If the `IMAGE.mhd` argument is not provided, the script will run for all the `.mhd` files located in the working directory of your terminal.  If a system folder is available in current directory of the terminal, it will be used, otherwise the the system folder is copied from the one in tutorial folder.   Therefore, if you want to modify the code settings, you can copy the system folder from the tutorial folder to current directory: `cp PATH/TO/src/ContactAngle/tutorial/system .`
 
 Do not run the script directly from the tutorial nor the src folder, run it from a clean folder to avoid overwriting files.
 
@@ -63,12 +65,16 @@ Note: the `controlDict` file is where run control parameters are set including s
 
 
 
-## Running the contact angle and fluid/fluid interface curvature code  -- advanced users
+## Manually running the contact angle and fluid/fluid interface curvature codes
 
 Open a terminal and type the following to run the code:
 
 ```  {.bash language="bash"}
-voxelToSurfaceML && surfaceAddLayerToCL && calcContactAngleUnifKc && more contactAngles.txt >>Kc.txt && more Kc.txt >> *_Layered_Smooth.vtk
+voxelToSurfaceML 
+surfaceAddLayerToCL 
+calcContactAngleUnifKc 
+cat contactAngles.txt >> Kc.txt 
+cat Kc.txt >> *_Layered_Smooth.vtk
 ``` 
 
 This command will execute the following:
