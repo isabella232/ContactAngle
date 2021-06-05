@@ -39,7 +39,7 @@ run a series of relatively quick test cases (see README.md files in
 subdirectories).  
 
 
-# Technical note on `src/script/` folder
+# Technical notes for code developers
 
 GNU Makefile scripts are used primarily for code compilation and 
 running quick tests by code developers.
@@ -67,12 +67,12 @@ required for running of the compiled applications.
 
 ---------
 
-## Aims 
+## Aims
 
 These scripts has been released as a separate module, to help 
 the code developers with script re-use,and simplification of 
-workflow for code compilation, testing, deployment and release.  
-Hopefully it can help others as well.
+workflow for code compilation, testing, deployment and release. 
+
 
 ---------
 
@@ -123,5 +123,15 @@ modules of the code, which it ends up in the msRoot directory in the
 modules published using git.  The `build`, `bin`,`lib`, `test` and 
 `share` folders are auto-geenerated and should not be used to store 
 any user data as they are remove by `make distclean` command.
+
+
+
+## Makefile usage
+
+ In `Makefile`s, define variables `tsts` together with `USE_msTEST=1` 
+ and `srcs` with `USE_msMAKE=1`.  If not defined, `srcs` will be set 
+ to all `.cpp` files.  Example Makefiles can be found in libvoxel 
+ (single source.cpp apps) or pnextract (multiple source.cpp files).
+
 
 
