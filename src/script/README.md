@@ -22,7 +22,7 @@ support and MPI. The compilation is tested using g++ (version 5+) (default)
 and using intel-2018 compilers.
 
 For the modules which have `thirdparty/foamx3m` as dependancy, you if you have
-any other OpenFOAM you have on your machine, need to temporarily **deactivate 
+any other OpenFOAM you have on your machine, need to temporarily ***deactivate 
 your OpenFOAM installation when compiling*** this code to avoid conflict between
 the foam3m provided here and your openfoam instalation.  
 
