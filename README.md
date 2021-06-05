@@ -16,10 +16,6 @@ The algorithms, however, are kept identical to the original code.
 
  ----------------------------------------------------------------
 
-## General notes
-
-
-
 ### Contact and References ###
 
 For references please see the original code or [src/ContactAngle](src/ContactAngle). 
