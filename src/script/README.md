@@ -24,7 +24,10 @@ and using intel-2018 compilers.
 For the modules which have `thirdparty/foamx3m` as dependancy, you if you have
 any other OpenFOAM you have on your machine, need to temporarily ***deactivate 
 your OpenFOAM installation when compiling*** this code to avoid conflict between
-the foam3m provided here and your openfoam instalation.  
+the foam3m provided here and your openfoam instalation.
+Additionally, you need to install foam3m dependancies, this can be done in Ubuntu
+by running:       
+`sudo apt install mpi-default-dev flex libscotch-dev`
 
 # Tests and demos
 To test the codes type:
