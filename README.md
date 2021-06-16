@@ -1,6 +1,6 @@
 ![make_and_test](https://github.com/aliraeini/ContactAngle-Curvature-Roughness/workflows/make_and_test/badge.svg)
 
-##  See  [src/ContactAngle](src/ContactAngle) for specific details on Contact-angle codes.
+##  See  [src/ContAngle](src/ContAngle) for specific details on Contact-angle codes.
 
 ##  See  [src/script/README.md](src/script/README.md) for compilation/build instructions.
 
@@ -18,6 +18,6 @@ The algorithms, however, are kept identical to the original code.
 
 ### Contact and References ###
 
-For references please see the original code or [src/ContactAngle](src/ContactAngle). 
+For references please see the original code or [src/ContAngle](src/ContAngle). 
 
 See [Imperial College Pore-scale Consortium website](https://www.imperial.ac.uk/earth-science/research/research-groups/pore-scale-modelling) for our recent publications and contact details.

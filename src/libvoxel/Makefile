@@ -1,12 +1,8 @@
-#TODO: implement OPTions: .exe dbg  .so, empty option means Linux executable
 
 srcs := voxelImageConvert.cpp    Ufraw2Uc.cpp   voxelToFoamPar.cpp  voxelToFoam.cpp
 tsts := test.py
-apps:=$(srcs:.cpp=${OPT})
-all: $(apps)
-
-$(warning Apps: ${apps})
-$(warning tsts: ${tsts})
+all: $(srcs)
+$(info srcs: $(srcs),   tsts: $(tsts) )
 
 
 msSrc ?= $(abspath ..)

@@ -58,7 +58,7 @@ The following required input files are provided in `docs/Example`:
 <https://www.digitalrocksportal.org/projects/151> and compressed in .gz format. 
 
 For measuring roughness - it is required to be applied on dry images (contain solid phase only). The voxel values of the segmented dry image should be solid = 1 and brine (or air) = 0.  THIS HAS NOT BEEN TESTED IN THIS FORKED REPOSITORY, YOU MAY NEED TO CHECK OUT THE [ORIGINAL] REPOSITORY.
- 
+
 
 2.  A sub-directory called `system` to comply with the basic directory structure for an OpenFOAM case. Make sure that there are two files (`controlDict` file and `meshingDict` file) in the system folder that contain the setting parameters.
 Note: the `controlDict` file is where run control parameters are set including start/end time. The `meshingDict` file is where the input and output files in each step of the algorithm is specified.

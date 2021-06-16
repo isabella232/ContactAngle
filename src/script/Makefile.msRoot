@@ -15,6 +15,7 @@ all: checkRoot
 	mkdir -p lib
 	mkdir -p bin
 	mkdir -p include
+	(cd ${ms3rd} && make -f ${msSrc}/script/makefile.3rd -j${nproc} zlib)
 	(cd ${ms3rd} && make -f ${msSrc}/script/makefile.3rd -j${nproc})
 	(cd ${msSrc} && script/AllMake)
 
@@ -38,7 +39,7 @@ distclean: checkRoot clean
 	@echo " deleting log.make, bin/, include/, lib/, share/ and test/"
 	@echo " Entre Ctrl+c to stop, or Entre to proceed?"
 	@echo "\n**********************************************************\n"
-	read   Ctrl_c_or_Entre
+	read   Ctrl_c_or_Entre | sleep 10
 	sleep 2
 	rm -rf   ${msRoot}/bin  ${msRoot}/include  ${msRoot}/lib  ${msRoot}/share ${msRoot}/test
 	(cd ${ms3rd} && make -f ${msSrc}/script/makefile.3rd  distclean)
