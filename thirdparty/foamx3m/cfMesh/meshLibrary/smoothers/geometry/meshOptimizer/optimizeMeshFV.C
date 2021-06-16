@@ -61,7 +61,7 @@ void meshOptimizer::untangleMeshFV
     const bool relaxedCheck
 )
 {
-    Info << "Starting untangling the mesh        SKIPPPPEEEEEDDDD " << endl; return ;
+    //Info << "Starting untangling the mesh        SKIPPPPEEEEEDDDD " << endl; return ;
     Info << "Starting untangling the mesh" << endl;
 
     # ifdef DEBUGSmooth

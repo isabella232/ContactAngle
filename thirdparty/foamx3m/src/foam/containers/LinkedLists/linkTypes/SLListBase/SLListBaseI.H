@@ -212,13 +212,13 @@ inline Foam::SLListBase::iterator& Foam::SLListBase::iterator::operator++()
 }
 
 
-inline Foam::SLListBase::iterator
-Foam::SLListBase::iterator::operator++(int)
-{
-	iterator tmp = *this;
-	++*this;
-	return tmp;
-}
+//inline Foam::SLListBase::iterator
+//Foam::SLListBase::iterator::operator++(int)
+//{
+	//iterator tmp = *this;
+	//++*this;
+	//return tmp;
+//}
 
 
 inline Foam::SLListBase::iterator

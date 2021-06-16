@@ -195,7 +195,7 @@ public:
 				inline link& operator*();
 
 				inline iterator& operator++();
-				inline iterator operator++(int);
+				//inline iterator operator++(int);
 		};
 
 		inline iterator begin();
