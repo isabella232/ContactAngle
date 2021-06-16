@@ -37,7 +37,7 @@ Description
          { ///. calculating smooth weight
              scalar avgAKcp(0.0);
              vector avgpNorm(0.0,0.0,0.0);
-             scalar sumWeightsKc(1.0e-18);
+             scalar sumWeightsKc(1e-18);
              forAll(neiPoints, neiPointI)
              {
                  const label pJ = neiPoints[neiPointI];
@@ -48,7 +48,7 @@ Description
                      sumWeightsKc += 1.0;
                  }
              }
-             if (sumWeightsKc>1.0e-15)
+             if (sumWeightsKc>1e-15)
              {
                  pAreasS[pI]   =    0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pAreasS[pI];
                  pNwS[pI]   =    avgpNorm/sumWeightsKc;
@@ -58,8 +58,8 @@ Description
 
      pAreasS=0.7*pAreasS+0.3*average(pAreas);
      pAw+=0.0001*pNwS;
-     pNwS/=(mag(pNwS)+1.0e-18);
-     vectorField  pNw=pAw/(mag(pAw)+1.0e-18);
+     pNwS/=(mag(pNwS)+1e-18);
+     vectorField  pNw=pAw/(mag(pAw)+1e-18);
 
      vectorField previousPoints(newPoints);
 
@@ -71,7 +71,7 @@ Description
          scalarField pKc(pNs.size(),0.0);
          scalarField pKcw(pNw.size(),0.0);
          scalarField pKcCL(pNs.size(),0.0);
-         scalarField pLCL(pNs.size(),1.0e-12);
+         scalarField pLCL(pNs.size(),1e-12);
          
          forAll(faces,fI)
          {/// compute Kc
@@ -90,7 +90,7 @@ Description
                      /// big impact...!!
                      //vector Le_se = 0.5*(0.5*Nex2+fNorms[fI]) ^ Le; ///. wrong
                      //vector Le_se = 0.33333*(Nex2+fNorms[fI]) ^ Le;
-                     vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[fI]*/) ^ Le) + 0.5*mag(Le)/(mag(Lsx2)+1.0e-18)*(Lsx2);
+                     vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[fI]*/) ^ Le) + 0.5*mag(Le)/(mag(Lsx2)+1e-18)*(Lsx2);
 
 
 					
@@ -98,7 +98,7 @@ Description
 					 pKc[e[1]] -= Le_se & pNs[e[1]];
 					 if (pMarks[e[0]]==4 && pMarks[e[1]]==4)
 					 {
-						Le_se = (Lsx2)/(mag(Lsx2)+1.0e-18);
+						Le_se = (Lsx2)/(mag(Lsx2)+1e-18);
 						pKcCL[e[0]] += Le_se & pNs[e[0]];
 						pKcCL[e[1]] -= Le_se & pNs[e[1]];
 						pLCL[e[0]] += (mag(Lsx2));
@@ -118,7 +118,7 @@ Description
                      
                      //vector Le_se = 0.5*(0.5*Nex2+fNorms[fI]) ^ Le; ///. wrong
                      //vector Le_se = 0.33333*(Nex2+fNorms[fI]) ^ Le;
-                     vector Le_se = 0.5*(0.5*((Nex2/*+fNorms[fI]*/) ^ Le) + (mag(Le)/(mag(Lsx2)+1.0e-18))*Lsx2);
+                     vector Le_se = 0.5*(0.5*((Nex2/*+fNorms[fI]*/) ^ Le) + (mag(Le)/(mag(Lsx2)+1e-18))*Lsx2);
 				
 					 pKcw[e[0]] += Le_se & pNw[e[0]];
 					 pKcw[e[1]] -= Le_se & pNw[e[1]];
@@ -392,7 +392,7 @@ Description
 		label markI = pMarks[pI];
 
 		vector avgPos(vector::zero);
-		scalar sumWeights(1.0e-28); 
+		scalar sumWeights(1e-28); 
 		if ( pMarks[pI] == 4 )
 		{
 			forAll(neiPoints, neiPointI)
@@ -429,7 +429,7 @@ Description
 			}
 		}
 		  
-		if (sumWeights>1.0e-18)
+		if (sumWeights>1e-18)
 		{
 			avgPos /= sumWeights;//myEdges.size();
 			displacements[pI] = avgPos-newPoints[pI]; //(0.8*relax)*((avgPos-newPoints[pI])&pNw[pI])*pNw[pI] + (0.2*relax)*(avgPos-newPoints[pI]);
@@ -455,7 +455,7 @@ Description
 		{ ///. contact line smoothing Vol preserve
 			const labelLoop& neiPoints = pNeips[pI];
 			vector avgDisp(vector::zero);
-			scalar sumWeights(1.0e-28); 
+			scalar sumWeights(1e-28); 
 			forAll(neiPoints, iii)
 			{
 				const label pJ = neiPoints[iii];
@@ -491,7 +491,7 @@ Description
 
 	Info<< "  A:  ["<<min(pAreas)<<" "<<max(pAreas)<<"] "; cout.flush();
 	Info<< "  k:  ["<<min(pKc); cout.flush();
-	//Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1.0e8,1.0e6),-1.0e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
+	//Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1e8,1e6),-1e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
 	Info<< " "<<max(pKc); cout.flush();
 	Info<< "],  DispMag  max:  "<<max(mag(displacements)); cout.flush();
 	Info<< "  avg:  "<<average(mag(displacements)); cout.flush();

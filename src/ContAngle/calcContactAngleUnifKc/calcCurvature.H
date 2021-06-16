@@ -50,7 +50,7 @@ Rc 1 75466 float
 
 
 
-    scalarField curvature(fNorms.size(),1.0e-12);
+    scalarField curvature(fNorms.size(),1e-12);
      ///. TODO to define normal vectors separately  
     forAll(faces,faceI)
     {

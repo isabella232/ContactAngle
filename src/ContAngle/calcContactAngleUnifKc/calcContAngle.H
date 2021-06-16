@@ -78,7 +78,7 @@ Description
 		pAw[vertI] = avgDisp;//myEdges.size();
 	  }
 	}
-  vectorField  pNw=pAw/(mag(pAw)+1.0e-12);
+  vectorField  pNw=pAw/(mag(pAw)+1e-12);
 
 
 
@@ -99,7 +99,7 @@ Description
 		pNs[vertI] = avgDisp;//myEdges.size();
 	  }
 	}
-   pNs=pNs/(mag(pNs)+1.0e-12);
+   pNs=pNs/(mag(pNs)+1e-12);
 
 
 

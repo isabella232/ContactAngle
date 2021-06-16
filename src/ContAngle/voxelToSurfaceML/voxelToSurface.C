@@ -49,6 +49,7 @@ Martin J Blunt:  m.blunt@imperial.ac.uk
 
 using namespace Foam;
 
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 // Main program:
 
@@ -218,12 +219,12 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
                 vector masterNormal=faces[connectingFace].normal(points);
                 vector Ce=0.5*(points[meshPoints[edges[eI][0]]]+points[meshPoints[edges[eI][1]]]);
                 vector tmf=faces[connectingFace].centre(points)-Ce;
-                tmf/=mag(tmf)+1.0e-15;
+                tmf/=mag(tmf)+1e-15;
 
                 forAll(myEdgeFaces, fI) if ( myEdgeFaces[fI]!=connectingFace && fMarks[myEdgeFaces[fI]]==fMarks[connectingFace] )
                 {
 					vector tf=faces[myEdgeFaces[fI]].centre(points)-Ce;
-					tf/=mag(tf)+1.0e-15;
+					tf/=mag(tf)+1e-15;
 					scalar sin=tf&masterNormal;
 					scalar cos=tf&tmf;
 					const double PI=3.14159265;

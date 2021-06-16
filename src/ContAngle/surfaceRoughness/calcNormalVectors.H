@@ -36,7 +36,7 @@ Description
          //~ {    label pCur=f[pI];
              //~ fNorms[faceI] += (newPoints[pCur]-newPoints[f.prevLabel(pI)])^(newPoints[f.nextLabel(pI)]-newPoints[pCur]); 
      //~ }    }
-     //~ fNorms=fNorms/(mag(fNorms)+1.0e-12);
+     //~ fNorms=fNorms/(mag(fNorms)+1e-12);
 
 ///. point-normal vectors
      vectorField pAw(pointPoints.size(),vector(0,0,0));
@@ -74,10 +74,10 @@ Description
 					 pAs[e[1]] -= AEdgeTri;//2.0*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
 		  }    
 	  }
-     //~ scalarField pAreas(0.5*mag(pAs)+1.0e-16);
-     scalarField pAreas(0.5*mag(pAs)+1.0e-18+0.5*mag(pAw));
-     scalarField pAreastmp(0.5*mag(pAs)+1.0e-18+0.5*mag(pAw));
-     vectorField pNs=pAs/(mag(pAs)+1.0e-18);
+     //~ scalarField pAreas(0.5*mag(pAs)+1e-16);
+     scalarField pAreas(0.5*mag(pAs)+1e-18+0.5*mag(pAw));
+     scalarField pAreastmp(0.5*mag(pAs)+1e-18+0.5*mag(pAw));
+     vectorField pNs=pAs/(mag(pAs)+1e-18);
 
 
 ///. point-normal vectors BC correction
@@ -96,8 +96,8 @@ Description
                       //pNNormB[f[pI]]+= pNsS*f.mag(points);   
               //}
           //}
-          //pNs-=pNNormB/(3.0*mag(pNNormB)+1.0e-12); ///.  TODO change 7.0 theoretical is 2 or 4, to check.
-          //pNs/=(mag(pNs)+1.0e-18);
+          //pNs-=pNNormB/(3.0*mag(pNNormB)+1e-12); ///.  TODO change 7.0 theoretical is 2 or 4, to check.
+          //pNs/=(mag(pNs)+1e-18);
       //}
 
 	///. point-normal vectors correction at contact line (BC), using linear extrapolation

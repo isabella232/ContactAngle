@@ -45,8 +45,8 @@ Description
         //~ }
         
     //~ }
-   //~ pNw=pNw/(mag(pNw)+1.0e-12);
-   //~ pNs=pNs/(mag(pNs)+1.0e-12);
+   //~ pNw=pNw/(mag(pNw)+1e-12);
+   //~ pNs=pNs/(mag(pNs)+1e-12);
 
 
 ///. point-normal vectors
@@ -71,9 +71,9 @@ Description
              else                                pNs[e[1]] -= pNE;//2.0*pNE-mag(pNE)*fNorms[faceI];
 		 }    
      }
-     scalarField pAreas(0.5*mag(pNs)+1.0e-18+0.5*mag(pNw));
-     pNs/=(mag(pNs)+1.0e-18);
-     pNw/=(mag(pNw)+1.0e-18);
+     scalarField pAreas(0.5*mag(pNs)+1e-18+0.5*mag(pNw));
+     pNs/=(mag(pNs)+1e-18);
+     pNw/=(mag(pNw)+1e-18);
 		
 	const vectorField previousPoints(newPoints);
 
@@ -91,7 +91,7 @@ Description
             const labelLoop& neiPoints = pNeips[vertI];
 			{
 				vector avgPos(vector::zero);
-				scalar sumWeights(1.0e-16); 
+				scalar sumWeights(1e-16); 
 				if ( pMarks[vertI] == 4 )
 				{
 				  forAll(neiPoints, neiPointI)
@@ -135,7 +135,7 @@ Description
             if( pMarks[vertI] == 4  )
             { ///. contact line smoothing
 				vector avgPos(vector::zero);
-				scalar sumWeights(1.0e-16); 
+				scalar sumWeights(1e-16); 
                 forAll(neiPoints, pI)
                 {
                     const label pJ = neiPoints[pI];
@@ -176,7 +176,7 @@ Description
 	forAll(pNeips, vertI)
 	{
 		vector avgDisp(vector::zero);
-		scalar sumWeights(1.0e-16);
+		scalar sumWeights(1e-16);
 
 		const labelLoop& neiPoints = pNeips[vertI];
 		label currentLabel = pMarks[vertI];

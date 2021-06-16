@@ -36,7 +36,7 @@ Description
          { ///. calculating smooth weight
              scalar avgAKcp(0.0);
              vector avgpNorm(0.0,0.0,0.0);
-             scalar sumWeightsKc(1.0e-18);
+             scalar sumWeightsKc(1e-18);
              forAll(neiPoints, neiPointI)
              {
                  const label neiVertI = neiPoints[neiPointI];
@@ -47,7 +47,7 @@ Description
                      sumWeightsKc += 1.0;
                  }
              }
-             if (sumWeightsKc>1.0e-15)
+             if (sumWeightsKc>1e-15)
              {
                  pAreasS[vertI]   =    0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pAreasS[vertI];
                  pNwS[vertI]   =    avgpNorm/sumWeightsKc;
@@ -57,8 +57,8 @@ Description
 
      pAreasS=0.7*pAreasS+0.3*average(pAreas);
      pAw+=0.0001*pNwS;
-     pNwS/=(mag(pNwS)+1.0e-18);
-     vectorField  pNw=pAw/(mag(pAw)+1.0e-18);
+     pNwS/=(mag(pNwS)+1e-18);
+     vectorField  pNw=pAw/(mag(pAw)+1e-18);
 
      vectorField previousPoints(newPoints);
 
@@ -80,7 +80,7 @@ Description
                      vector Nex2=(pNs[e[0]] + pNs[e[1]]);
                      vector Ce=0.5*(newPoints[e[0]] + newPoints[e[1]]);
                      
-                     vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[faceI]*/) ^ (Ce-Cf[faceI])) + 0.5*mag(Ce-Cf[faceI])/(mag(L_E)+1.0e-18)*(L_E);
+                     vector Le_se = 0.5*(0.5*(Nex2/*+fNorms[faceI]*/) ^ (Ce-Cf[faceI])) + 0.5*mag(Ce-Cf[faceI])/(mag(L_E)+1e-18)*(L_E);
 				
 					 pKcw[e[0]] += Le_se & pNw[e[0]];
 					 pKcw[e[1]] -= Le_se & pNw[e[1]];
@@ -106,7 +106,7 @@ Description
 			{
 				//vector Ra(vector::zero);
 				scalar R(pKcwTmp[vertI]);
-				scalar sumWeights(1.0e-16); 
+				scalar sumWeights(1e-16); 
 				if ( pMarks[vertI] == 1 || pMarks[vertI] == 3 || pMarks[vertI] == 4)
 				{
 				  forAll(neiPoints, neiPointI)
@@ -252,7 +252,7 @@ Description
 
 
 		vector avgPos(vector::zero);
-		scalar sumWeights(1.0e-28); 
+		scalar sumWeights(1e-28); 
 		//if ( pMarks[vertI] == 4 )
 		//{
 			//forAll(neiPoints, neiPointI)
@@ -289,7 +289,7 @@ Description
 		  }
 		}
 		  
-			if (sumWeights>1.0e-18)
+			if (sumWeights>1e-18)
 			{
 				avgPos /= sumWeights;//myEdges.size();
 				displacements[vertI] = avgPos-newPoints[vertI]; //(0.8*relax)*((avgPos-newPoints[vertI])&pNw[vertI])*pNw[vertI] + (0.2*relax)*(avgPos-newPoints[vertI]);
@@ -299,7 +299,7 @@ Description
 			//~ if( currentLabel == 4  )
 			//~ { ///. contact line smoothing
 				//~ vector avgPos(vector::zero);
-				//~ scalar sumWeights(1.0e-16); 
+				//~ scalar sumWeights(1e-16); 
 				//~ forAll(neiPoints, iii)
 				//~ {
 					//~ const label neiVertI = neiPoints[iii];
@@ -335,7 +335,7 @@ Description
 		{ ///. contact line smoothing Vol preserve
 			const labelLoop& neiPoints = pointPoints[vertI];
 			vector avgDisp(vector::zero);
-			scalar sumWeights(1.0e-28); 
+			scalar sumWeights(1e-28); 
 			forAll(neiPoints, iii)
 			{
 				const label neiVertI = neiPoints[iii];
@@ -366,7 +366,7 @@ Description
 
 	Info<< "  A:  ["<<min(pAreas)<<" "<<max(pAreas)<<"] "; cout.flush();
 	Info<< "  Kw:  ["<<min(pKcw); cout.flush();
-	//~ Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1.0e8,1.0e6),-1.0e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
+	//~ Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1e8,1e6),-1e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
 	Info<< " "<<max(pKcw); cout.flush();
 	Info<< "],  DispMag  max:  "<<max(mag(displacements)); cout.flush();
 	Info<< "  avg:  "<<average(mag(displacements)); cout.flush();
@@ -384,7 +384,7 @@ Description
             const labelLoop& neiPoints = pointPoints[vertI];
 			{
 				scalar RS(D[vertI]);
-				scalar sumWeights(1.0e-16); 
+				scalar sumWeights(1e-16); 
 				if ( pMarks[vertI] == 1 || pMarks[vertI] == 3 || pMarks[vertI] == 4)
 				{
 				  forAll(neiPoints, neiPointI)
