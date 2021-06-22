@@ -104,9 +104,6 @@ public:
 		inline SLListBase(link*);
 
 
-	//- Destructor
-	~SLListBase();
-
 
 	// Member Functions
 
@@ -187,7 +184,7 @@ public:
 
 			// Member operators
 
-				inline void operator=(const iterator&);
+				inline void operator=(const iterator&) = delete;
 
 				inline bool operator==(const iterator&) const;
 				inline bool operator!=(const iterator&) const;
@@ -226,7 +223,7 @@ public:
 
 			// Member operators
 
-				inline void operator=(const const_iterator&);
+				inline void operator=(const const_iterator&) = delete;
 
 				inline bool operator==(const const_iterator&) const;
 				inline bool operator!=(const const_iterator&) const;

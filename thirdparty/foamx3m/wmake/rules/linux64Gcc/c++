@@ -1,6 +1,6 @@
 .SUFFIXES: .C .cxx .cc .cpp
 
-c++WARN     = -Wall -Wextra -Wno-unused-parameter -Wnon-virtual-dtor -Wimplicit-fallthrough=0
+c++WARN     = -Wall -Wextra -Wno-unused-parameter -Wnon-virtual-dtor 
 
 CC          = $(WM_CXX) -m64 -std=c++11
 
