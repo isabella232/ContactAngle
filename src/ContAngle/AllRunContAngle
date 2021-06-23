@@ -24,7 +24,7 @@ for ImageName in $ImageNames ; do
  else
    mkdir $ImageName
    if [ -d system ]; then cp -r system $ImageName/;
-   else                   cp -r $msSrc/ContactAngle/tutorial/system $ImageName/; fi
+   else                   cp -r $msSrc/ContAngle/tutorial/system $ImageName/; fi
    
    cp $ImageName.* $ImageName/
 
@@ -39,6 +39,7 @@ for ImageName in $ImageNames ; do
   (cd $ImageName/ && calcContactAngleUnifKc )
   (cd $ImageName/ && more contactAngles.txt >>Kc.txt)
   (cd $ImageName/ && more Kc.txt >> *_Layered_Smooth.vtk)
+  echo $?
 
  fi
 done

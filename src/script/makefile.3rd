@@ -56,7 +56,7 @@ zlib:
 
 lPng=$(shell [ -d ${ms3rd}/libpng ] && [ ! -f ${msRoot}/lib/libpng.a ] && echo lPng)
 libpng:
-	[ lPng  != "$(lPng)" ] || (cd  ${ms3rd}/libpng && make -j all OPT=.exe)
+	[ lPng  != "$(lPng)" ] || (cd  ${ms3rd}/libpng && make -j all OPT=${OPT})
 #zlib:
 #	[ -f ${msRoot}/include/zfstream.h ] || cp ${ms3rd}/zfstream/zfstream.h ${msRoot}/include/
 
