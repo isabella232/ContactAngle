@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -170,8 +170,8 @@ void SRFTotalPressureFvPatchScalarField::updateCoeffs(const vectorField& Up)
 		return;
 	}
 
-	const fvsPatchField<scalar>& phip =
-		patch().lookupPatchField<surfaceScalarField, scalar>(phiName_);
+	const fvsPatchScalarField& phip =
+		lookupPatchField<surfaceScalarField, scalar>(phiName_);
 
 	if (psiName_ == "none" && rhoName_ == "none")
 	{

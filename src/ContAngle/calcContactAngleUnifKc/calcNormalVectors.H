@@ -71,7 +71,7 @@ Description
 				 else if( fMarks[faceI] != 2 )        
 					 pAw[e[1]] -= AEdgeTri;
 				 else 
-					 pAs[e[1]] -= AEdgeTri;//2.0*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
+					 pAs[e[1]] -= AEdgeTri;//2.*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
 		  }    
 	  }
      //scalarField pAreas(0.5*mag(pAs)+1e-16);

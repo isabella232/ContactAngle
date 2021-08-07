@@ -37,7 +37,7 @@ int usage()  {
 		" ElementType = MET_SHORT\n"
 		"\n"
 		" DimSize     = 650  650  650\n"
-		" ElementSize = 5.0  5.0  5.0\n"
+		" ElementSize = 5.   5.   5.\n"
 		" Offset      = 0    0    0\n"
 		"\n"
 		" ElementDataFile = Berea.tif\n"

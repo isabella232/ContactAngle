@@ -1,17 +1,12 @@
 
 msSrc ?= ..
 
-all:    wmake
 
-
-wmake:
-	${msSrc}/script/AllMake
+all:  ; 
+	$(MAKE) -f  ${msSrc}/script/Makefile.in  recurseMake USE_msRecurse=1
 	cp AllRunContAngle  ${msSrc}/../bin/foamx3m/
 
-
-clean:
-	${msSrc}/script/AllClean
-
+clean:; $(MAKE) -f  ${msSrc}/script/Makefile.in  recurseClean USE_msRecurse=1
 
 tsts=test.sh
 USE_msTEST=1

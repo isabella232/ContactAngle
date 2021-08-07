@@ -18,10 +18,10 @@ startTime       0;
 stopAt          endTime;
 
 maxExecutionTime   48000;
-maxS1   1.0;
+maxS1   1.;
 minS1   0.05;
 
- endTime  5.0; 
+ endTime  5.; 
 
 deltaT          1e-7;
 

@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -218,6 +218,9 @@ transFunc(atanh)
 transFunc(erf)
 transFunc(erfc)
 transFunc(lgamma)
+
+#ifndef __STRICT_ANSI__
+
 transFunc(j0)
 transFunc(j1)
 transFunc(y0)
@@ -246,6 +249,8 @@ dimensionedScalar func(const int n, const dimensionedScalar& ds)		   \
 
 transFunc(jn)
 transFunc(yn)
+
+#endif //__STRICT_ANSI__
 
 #undef transFunc
 

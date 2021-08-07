@@ -11,9 +11,6 @@
 #include <string.h>
 #include <iostream>
 
-#ifdef HAVE_UNISTD_H
-# include <unistd.h>
-#endif
 
 
 
@@ -112,7 +109,7 @@ template<typename T>   int readTif( voxelField<T>&  aa, std::string fnam )
         
 
 	TIFF *tif = (TIFF *) NULL;
-	tif = TIFFOpen(fnam.c_str(), "r");	 if (tif == NULL)	return (-1);
+	tif = TIFFOpen(fnam.c_str(), "r");	 if (tif == NULL)	{ alert("Cannot open tif"); return -1; }
 
 
 	TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, &nx);
@@ -126,7 +123,7 @@ template<typename T>   int readTif( voxelField<T>&  aa, std::string fnam )
 	  if(vxls) {  getTifTags(vxls->X0Ch(),vxls->dxCh(),tif);
 		  (std::cout<<",  X0:"<<vxls->X0()<<",  dx:"<<vxls->dx()).flush(); } }
 
-	aa.reset(nx,ny,npages,T(0.0));
+	aa.reset(nx,ny,npages,T(0.));
 
 
 	for(int pn=0;pn<npages;++pn) {
@@ -138,7 +135,7 @@ template<typename T>   int readTif( voxelField<T>&  aa, std::string fnam )
   	TIFFClose(tif);
 
 	std::cout<<  " ."<<std::endl;
-	return (0);
+	return 0;
 }
 
 template<typename T>   int writeTif(const voxelField<T>&  aa, std::string fnam)  {

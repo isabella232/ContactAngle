@@ -32,22 +32,22 @@ Description
       {
          const labelLoop& neiPoints = pointPoints[vertI];
          { ///. calculating smooth weight
-             scalar avgAKcp(0.0);
-             vector avgpNorm(0.0,0.0,0.0);
+             scalar avgAKcp(0.);
+             vector avgpNorm(0.,0.,0.);
              scalar sumWeightsKc(1e-18);
              forAll(neiPoints, neiPointI)
              {
                  const label neiVertI = neiPoints[neiPointI];
-                 {    scalar weight=1.0;
+                 {    scalar weight=1.;
                      if( pMarks[neiVertI]==4 ) weight *= 0.1;
                      avgAKcp += weight * pAreas[neiVertI];
                      avgpNorm += pAw[neiVertI];
-                     sumWeightsKc += 1.0;
+                     sumWeightsKc += 1.;
                  }
              }
              if (sumWeightsKc>1e-15)
              {
-                 pAreasS[vertI]   =    0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pAreasS[vertI];
+                 pAreasS[vertI]   =    0.5*avgAKcp/sumWeightsKc + (1.-0.5)*pAreasS[vertI];
                  pNwS[vertI]   =    avgpNorm/sumWeightsKc;
              }
          }
@@ -63,7 +63,7 @@ Description
 
          ///. point-normal curvature
 		 scalarField Kcw(pAreasS.size());
-         scalarField pKcw(pNw.size(),0.0);
+         scalarField pKcw(pNw.size(),0.);
          forAll(faces,faceI)
          {
          label corLabel=fMarks[faceI];
@@ -108,7 +108,7 @@ Description
 						const label neiVertI = neiPoints[neiPointI];
 						if( pMarks[neiVertI]!=2)
 						{
-							scalar weight=1.0;
+							scalar weight=1.;
 							R += weight * pKcwTmp[neiVertI]* pAreas[neiVertI];
 							sumWeights += weight;
 							sumpAreas += pAreas[neiVertI];
@@ -141,7 +141,7 @@ Description
 	scalar vxlsize=Foam::sqrt(average(pAreas));
 
 
-	vector    zz(0.0,0.0,1.0);
+	vector    zz(0.,0.,1.);
 	vector BMid=0.5*(BB.max()+BB.min());
 	scalar radius=0.25*(BB.max()[0]-BB.min()[0]  +  BB.max()[1]-BB.min()[1]);
 
@@ -163,17 +163,17 @@ Description
 			{
 				if(	
 				///cylindrical image
-					mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 && mag(points[vertI][2]-BMax[2])>5.0*vxlsize 
-				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.0*vxlsize)
+					mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 && mag(points[vertI][2]-BMax[2])>5.*vxlsize 
+				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.*vxlsize)
 				 
 				///cubical image
-					//mag(points[vertI][0]-BMin[0])>5.0*vxlsize 
-				 //&& mag(points[vertI][0]-BMax[0])>5.0*vxlsize
-				 //&& mag(points[vertI][1]-BMin[1])>5.0*vxlsize 
-				 //&& mag(points[vertI][1]-BMax[1])>5.0*vxlsize
-				 //&& mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 //&& mag(points[vertI][2]-BMax[2])>5.0*vxlsize
+					//mag(points[vertI][0]-BMin[0])>5.*vxlsize 
+				 //&& mag(points[vertI][0]-BMax[0])>5.*vxlsize
+				 //&& mag(points[vertI][1]-BMin[1])>5.*vxlsize 
+				 //&& mag(points[vertI][1]-BMax[1])>5.*vxlsize
+				 //&& mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 //&& mag(points[vertI][2]-BMax[2])>5.*vxlsize
 				  )
 				{
 					offRaX<<"";
@@ -193,17 +193,17 @@ Description
 			{
 				if(
 				///cylindrical image
-					mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 && mag(points[vertI][2]-BMax[2])>5.0*vxlsize 
-				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.0*vxlsize)
+					mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 && mag(points[vertI][2]-BMax[2])>5.*vxlsize 
+				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.*vxlsize)
 				 
 				 ///cubical image
-					//mag(points[vertI][0]-BMin[0])>5.0*vxlsize 
-				 //&& mag(points[vertI][0]-BMax[0])>5.0*vxlsize
-				 //&& mag(points[vertI][1]-BMin[1])>5.0*vxlsize 
-				 //&& mag(points[vertI][1]-BMax[1])>5.0*vxlsize
-				 //&& mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 //&& mag(points[vertI][2]-BMax[2])>5.0*vxlsize
+					//mag(points[vertI][0]-BMin[0])>5.*vxlsize 
+				 //&& mag(points[vertI][0]-BMax[0])>5.*vxlsize
+				 //&& mag(points[vertI][1]-BMin[1])>5.*vxlsize 
+				 //&& mag(points[vertI][1]-BMax[1])>5.*vxlsize
+				 //&& mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 //&& mag(points[vertI][2]-BMax[2])>5.*vxlsize
 				  )
 				  {
 					ofpKcw<<"";
@@ -224,17 +224,17 @@ Description
 			{
 				if(
 				///cylindrical image
-					mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 && mag(points[vertI][2]-BMax[2])>5.0*vxlsize 
-				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.0*vxlsize)
+					mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 && mag(points[vertI][2]-BMax[2])>5.*vxlsize 
+				 &&	mag(BMid - points[vertI] - ((BMid - points[vertI])&zz)*zz)<(radius-5.*vxlsize)
 				 
 				 ///cubical image
-					//mag(points[vertI][0]-BMin[0])>5.0*vxlsize 
-				 //&& mag(points[vertI][0]-BMax[0])>5.0*vxlsize
-				 //&& mag(points[vertI][1]-BMin[1])>5.0*vxlsize 
-				 //&& mag(points[vertI][1]-BMax[1])>5.0*vxlsize
-				 //&& mag(points[vertI][2]-BMin[2])>5.0*vxlsize 
-				 //&& mag(points[vertI][2]-BMax[2])>5.0*vxlsize
+					//mag(points[vertI][0]-BMin[0])>5.*vxlsize 
+				 //&& mag(points[vertI][0]-BMax[0])>5.*vxlsize
+				 //&& mag(points[vertI][1]-BMin[1])>5.*vxlsize 
+				 //&& mag(points[vertI][1]-BMax[1])>5.*vxlsize
+				 //&& mag(points[vertI][2]-BMin[2])>5.*vxlsize 
+				 //&& mag(points[vertI][2]-BMax[2])>5.*vxlsize
 				  )
 				  {
 					ofpA<<"";

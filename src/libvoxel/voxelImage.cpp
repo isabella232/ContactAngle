@@ -20,7 +20,7 @@ Ali Q Raeini: a.q.raeini@imperial.ac.uk
 #include "shapeToVoxel.h"
 #include "voxelEndian.h"
 #include "globals.h"  // ensure...
-//#include "voxelNoise.h"
+#include "voxelRegions.h"
 #include "InputFile.h"
 
 using namespace std; //cin cout endl string stringstream  istream istringstream regex*
@@ -156,7 +156,7 @@ template<typename T> bool resampleMode( stringstream& ins, voxelImageT<T>& vImg)
 }
 
 template<typename T> bool redirect( stringstream& ins, voxelImageT<T>& vImg)  {
-	KeyHint("directiom(y/z) // flip x with y or z axes");
+	KeyHint("direction(y/z) // flip x with y or z axes");
 	char axs;
 	ins>>axs;
 	(cout<<axs<<", swapping x and "<<axs<<" axes").flush();
@@ -231,7 +231,7 @@ template<typename T> bool read( stringstream& ins, voxelImageT<T>& vImg)  {
 	cout<<"  reading from  image "<<fnam<<endl;
 	if(fnam.size()>4)  {
 		if ((nnn[2] && (hasExt(fnam,7,".raw.gz") || hasExt(fnam,4,".raw"))) || hasExt(fnam,4,".tif") )  {
-			vImg.reset(nnn,0);
+			vImg.reset(nnn,T(0));
 			vImg.readBin(fnam);
 		}
 		else vImg.readFromHeader(fnam,processHdr);
@@ -397,6 +397,13 @@ template<typename T> bool Offset( stringstream& ins, voxelImageT<T>& vImg)  {
 }
 
 
+template<typename T>  bool keepLargest0( stringstream& ins, voxelImageT<T>& vImg)  {
+	KeyHint(" // sets smaller isolated regions (of value 0) to 254, computationally expensive");	
+	keepLargest0(vImg); //! CtrlF:isolated=254
+	(cout<<".").flush();
+	return 0;
+}
+
 template<typename T>  bool growLabel( stringstream& ins, voxelImageT<T>& vImg)  {
 	KeyHint("vvalue(255)  nIters(0) ");
 	int  vv(255), nIters(0);  ins >> vv >> nIters;
@@ -504,6 +511,7 @@ std::unordered_map<string,bool(*)( stringstream&, voxelImageT<T>&)>
 		{  "delense032"   , ProcessP(& delense032 )},
 		{  "circleOut"    , ProcessP(& circleOut )},
 		{  "growLabel"    , ProcessP(& growLabel )},
+		{  "keepLargest0"    , ProcessP(& keepLargest0 )},
 		{  "maskWriteFraction"  ,ProcessP(& maskWriteFraction )},
 		{  "mapFrom"      , ProcessP(& mapFrom )},
 		//{  "addSurfNoise" , ProcessP(& addSurfNoise )},
@@ -555,7 +563,7 @@ class  voxelplugins
 	typedef bool(*ProcessP)( stringstream&  inputs, voxelImageT<T>& vImg);
 
 	std::unordered_map<string,ProcessP> key_funs;
-	const std::unordered_map<string,ProcessP>& operator()() const {return key_funs;};
+	const std::unordered_map<string,ProcessP>& operator()() const { return key_funs; }
 	voxelplugins() {
 		using namespace MCTProcessing;
 		key_funs = MCTProcessing::namedProcesses<T>();
@@ -575,7 +583,7 @@ class  voxelplugins
 				if(inp.data().size()>2) cout<<endl;
 			}
 			else {
-				if(ky.first!="end") { cout<<"  stopped executing "<<inp.fileName()<<" before \""<<ky.first<<"\"  :/ "; 
+				if(ky.first!="end") { cout<<"  stopped executing "+inp.fileName()+" before \""+ky.first+"\"  :/ "; 
 												return -1; }
 				break;
 			}
@@ -648,8 +656,7 @@ string VxlKeysHelp(string keyname, string subkey)  {
 		for(const auto& proc:key_funs) 	keys<<proc.first<<"\n";
 		keys<<" Error: no such keyword "<<keyname<<"\n\n";
 	}
-	else
-	{
+	else  {
 		std::vector<std::pair<string,ProcessP>> keyfuns(key_funs.begin(), key_funs.end());
 		std::sort(keyfuns.begin(), keyfuns.end());
 		for(const auto& proc:keyfuns)  if(proc.first.size()>1)  {
@@ -665,9 +672,9 @@ string VxlKeysHelp(string keyname, string subkey)  {
 
 
 template<typename T>
-void voxelImageT<T>::readFromHeader(istream& hdrFile,	const string& hdrNam, int procesKeys, string inputName )  {
+void voxelImageT<T>::readFromHeader(istream& hdrFile, const string& hdrNam, int procesKeys)  {
 	//! read image from file header, format detected based on image extension
-	auto& vImg=*this;
+	auto& vImg=*this; string inputName;
 
 	int3 nnn(0,0,0);
 	string BinaryData="XXX", flipSigByt="False";
@@ -738,35 +745,32 @@ void voxelImageT<T>::readFromHeader(istream& hdrFile,	const string& hdrNam, int 
 		if (hasExt(hdrNam,7,"_header"))  inputName=hdrNam.substr(0,hdrNam.size()-7);
 		hdrFile>>nnn >> vImg.dx_ >>	vImg.X0_ ;
 		cout<<"\n Nxyz: "<<nnn<<"    dX: "<< vImg.dx_<<"   X0: "<< vImg.X0_ <<" um"<< endl;
-		if (!hdrFile)	 { cout<<"   Incomplete/bad header name, aborting"<<endl; exit(-1);}
+		if (!hdrFile)	 { cout<<"   Incomplete/bad header name. Aborting"<<endl; exit(-1); }
 	}
 	else  alert("Unknown (header) file type: "+hdrNam,-1); // exit
 
 	if(nnn.z) vImg.reset(nnn);
+	int readingImage=0;
 	if( !inputName.empty() && inputName!="NO_READ" && procesKeys!=2)  {
 	  if (hasExt(inputName,4,".tif"))  {
 			dbl3 dx=vImg.dx_, X0=vImg.X0_;
-			bool readingImage = vImg.readBin(inputName);
-			assert(readingImage);
+			readingImage = vImg.readBin(inputName);
 			if(X0read) vImg.X0_=X0;
 			if(dxread) vImg.dx_=dx;
 	  }
 	  else if ((hasExt(inputName,4,".raw") && BinaryData!="False") || BinaryData=="True")   {
-			bool readingImage = vImg.readBin(inputName, nSkipBytes);
-			assert(readingImage);
+			readingImage = vImg.readBin(inputName, nSkipBytes);
 	  }
 	  else if (hasExt(inputName,3,".am"))    {
 			int RLECompressed;
 			dbl3 dx=vImg.dx_, X0=vImg.X0_;
 			getAmiraHeaderSize(inputName, nnn,vImg.dx_,vImg.X0_,nSkipBytes,RLECompressed);
-			bool readingImage = vImg.readBin(inputName, nSkipBytes);
-			assert(readingImage);
+			readingImage = vImg.readBin(inputName, nSkipBytes);
 			if(X0read) vImg.X0_=X0;
 			if(dxread) vImg.dx_=dx;
 	  }
 	  else if (hasExt(inputName,7,".raw.gz"))   {
-			bool readingImage = vImg.readBin(inputName);
-			assert(readingImage);
+			readingImage = vImg.readBin(inputName);
 	  }
 	  else   {
 		std::ifstream in(inputName);  assert(in);
@@ -774,6 +778,7 @@ void voxelImageT<T>::readFromHeader(istream& hdrFile,	const string& hdrNam, int 
 		vImg.voxelField<T>::readAscii(in);
 	  }
 	}
+	ensure(readingImage==0, "cannot read image "+inputName,-1);
 
 	if(flipSigByt=="True") {
 		cout<<"  flipEndian "<<endl;
@@ -795,12 +800,12 @@ void voxelImageT<T>::readFromHeader(istream& hdrFile,	const string& hdrNam, int 
 
 
 
-template void voxelImageT<unsigned char>::readFromHeader(istream&,	const string&, int, string );
-template void voxelImageT<unsigned short>::readFromHeader(istream&,	const string&, int, string );
-template void voxelImageT<int>::readFromHeader(istream&,	const string&, int, string );
-template void voxelImageT<float>::readFromHeader(istream&,	const string&, int, string );
-template void voxelImageT<double>::readFromHeader(istream&,	const string&, int, string );
-template void voxelImageT<float3>::readFromHeader(istream&,	const string&, int, string );
+template void voxelImageT<unsigned char>::readFromHeader(istream&,	const string&, int );
+template void voxelImageT<unsigned short>::readFromHeader(istream&,	const string&, int );
+template void voxelImageT<int>::readFromHeader(istream&,	const string&, int );
+template void voxelImageT<float>::readFromHeader(istream&,	const string&, int );
+template void voxelImageT<double>::readFromHeader(istream&,	const string&, int );
+template void voxelImageT<float3>::readFromHeader(istream&,	const string&, int );
 
 
 

@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ timeVaryingMappedFixedValueFvPatchField
 	fixedValueFvPatchField<Type>(p, iF),
 	fieldTableName_(iF.name()),
 	setAverage_(false),
-	referenceCS_(NULL),
+	referenceCS_(nullptr),
 	nearestVertex_(0),
 	nearestVertexWeight_(0),
 	sampleTimes_(0),
@@ -82,7 +82,7 @@ timeVaryingMappedFixedValueFvPatchField
 	fixedValueFvPatchField<Type>(ptf, p, iF, mapper),
 	fieldTableName_(ptf.fieldTableName_),
 	setAverage_(ptf.setAverage_),
-	referenceCS_(NULL),
+	referenceCS_(nullptr),
 	nearestVertex_(0),
 	nearestVertexWeight_(0),
 	sampleTimes_(0),
@@ -113,7 +113,7 @@ timeVaryingMappedFixedValueFvPatchField
 	fixedValueFvPatchField<Type>(p, iF),
 	fieldTableName_(iF.name()),
 	setAverage_(readBool(dict.lookup("setAverage"))),
-	referenceCS_(NULL),
+	referenceCS_(nullptr),
 	nearestVertex_(0),
 	nearestVertexWeight_(0),
 	sampleTimes_(0),

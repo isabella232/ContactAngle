@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -54,10 +54,10 @@ Foam::surfaceInterpolation::surfaceInterpolation(const fvMesh& fvm)
 	mesh_(fvm),
 	schemesDict_(fvm),
 	solutionDict_(fvm),
-	weightingFactors_(NULL),
-	differenceFactors_(NULL),
+	weightingFactors_(nullptr),
+	differenceFactors_(nullptr),
 	orthogonal_(false),
-	correctionVectors_(NULL)
+	correctionVectors_(nullptr)
 {}
 
 

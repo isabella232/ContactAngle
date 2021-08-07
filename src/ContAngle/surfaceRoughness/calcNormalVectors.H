@@ -71,7 +71,7 @@ Description
 				 else if( fMarks[faceI] != 2 )        
 					 pAw[e[1]] -= AEdgeTri;
 				 else 
-					 pAs[e[1]] -= AEdgeTri;//2.0*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
+					 pAs[e[1]] -= AEdgeTri;//2.*AEdgeTri-mag(AEdgeTri)*fNorms[faceI];
 		  }    
 	  }
      //~ scalarField pAreas(0.5*mag(pAs)+1e-16);
@@ -85,7 +85,7 @@ Description
           //vectorField pNNormB(pointPoints.size(),vector(0,0,0));
           //forAll(faces,faceI)
           //{   const face & f=faces[faceI];
-              //vector pNsS(0.0,0.0,0.0);
+              //vector pNsS(0.,0.,0.);
               //forAll(f, pI)
               //{    if( fMarks[faceI]!=2 && pMarks[f[pI]]==fMarks[faceI] )
                       //pNsS+=pNs[f[pI]]; 
@@ -96,7 +96,7 @@ Description
                       //pNNormB[f[pI]]+= pNsS*f.mag(points);   
               //}
           //}
-          //pNs-=pNNormB/(3.0*mag(pNNormB)+1e-12); ///.  TODO change 7.0 theoretical is 2 or 4, to check.
+          //pNs-=pNNormB/(3.*mag(pNNormB)+1e-12); ///.  TODO change 7. theoretical is 2 or 4, to check.
           //pNs/=(mag(pNs)+1e-18);
       //}
 

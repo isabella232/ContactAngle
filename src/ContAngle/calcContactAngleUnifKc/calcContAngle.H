@@ -110,7 +110,7 @@ Description
 //~ exit(0);
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	scalarField cosContactAngle(pNeips.size(),2.0);
+	scalarField cosContactAngle(pNeips.size(),2.);
 
 
 	int countCA = 0;
@@ -133,7 +133,7 @@ Description
 	scalar vxlsize=Foam::sqrt(average(pAreas));
 
 
-	vector    zz(0.0,0.0,1.0);
+	vector    zz(0.,0.,1.);
 	vector BMid=0.5*(BB.max()+BB.min());
 	scalar radius=0.25*(BB.max()[0]-BB.min()[0]  +  BB.max()[1]-BB.min()[1]);
 
@@ -155,19 +155,19 @@ Description
 			if(pMarks[i] == 4)
 				///cubical image
 				//~ if(
-				   //~ mag(points[i][0]-BMin[0])>5.0*vxlsize
-				//~ && mag(points[i][1]-BMin[1])>5.0*vxlsize
-				//~ && mag(points[i][2]-BMin[2])>5.0*vxlsize
-				//~ && mag(points[i][0]-BMax[0])>5.0*vxlsize
-				//~ && mag(points[i][1]-BMax[1])>5.0*vxlsize
-				//~ && mag(points[i][2]-BMax[2])>5.0*vxlsize
+				   //~ mag(points[i][0]-BMin[0])>5.*vxlsize
+				//~ && mag(points[i][1]-BMin[1])>5.*vxlsize
+				//~ && mag(points[i][2]-BMin[2])>5.*vxlsize
+				//~ && mag(points[i][0]-BMax[0])>5.*vxlsize
+				//~ && mag(points[i][1]-BMax[1])>5.*vxlsize
+				//~ && mag(points[i][2]-BMax[2])>5.*vxlsize
 				//~ )
 				
 				///cylindrical image
 				if(	
-					mag(points[i][2]-BMin[2])>5.0*vxlsize 
-				 && mag(points[i][2]-BMax[2])>5.0*vxlsize 
-				 &&	mag(BMid - points[i] - ((BMid - points[i])&zz)*zz)<(radius-5.0*vxlsize)
+					mag(points[i][2]-BMin[2])>5.*vxlsize 
+				 && mag(points[i][2]-BMax[2])>5.*vxlsize 
+				 &&	mag(BMid - points[i] - ((BMid - points[i])&zz)*zz)<(radius-5.*vxlsize)
 				  )
 				{
 					//~ offContAngle<<-(cosContactAngle[i])<<"  "<<std::acos(cosContactAngle[i])*180/3.1415926535 <<"\n";

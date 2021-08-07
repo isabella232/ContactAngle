@@ -213,14 +213,14 @@ struct yy_buffer_state
  * future we want to put the buffer states in a more general
  * "scanner state".
  *
- * Returns the top of the stack, or NULL.
+ * Returns the top of the stack, or nullptr.
  */
 #define YY_CURRENT_BUFFER ( (yy_buffer_stack) \
                           ? (yy_buffer_stack)[(yy_buffer_stack_top)] \
-                          : NULL)
+                          : nullptr)
 
 /* Same as previous macro, but useful when we know that the buffer stack is not
- * NULL or when we need an lvalue. For internal use only.
+ * nullptr or when we need an lvalue. For internal use only.
  */
 #define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 
@@ -827,7 +827,7 @@ static const flex_int16_t yy_chk[594] =
 /*--------------------------------*- C++ -*----------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -1554,7 +1554,7 @@ void yyFlexLexer::ctor_common()
 	yy_more_offset = yy_prev_more_offset = 0;
 
 	yy_start_stack_ptr = yy_start_stack_depth = 0;
-	yy_start_stack = NULL;
+	yy_start_stack = nullptr;
 
 	yy_buffer_stack = 0;
 	yy_buffer_stack_top = 0;
@@ -2129,7 +2129,7 @@ void yyFlexLexer::yyrestart( std::istream* input_file )
  */
 void yyFlexLexer::yypush_buffer_state (YY_BUFFER_STATE new_buffer)
 {
-    	if (new_buffer == NULL)
+    	if (new_buffer == nullptr)
 		return;
 
 	yyensure_buffer_stack();
@@ -2163,7 +2163,7 @@ void yyFlexLexer::yypop_buffer_state (void)
 		return;
 
 	yy_delete_buffer(YY_CURRENT_BUFFER );
-	YY_CURRENT_BUFFER_LVALUE = NULL;
+	YY_CURRENT_BUFFER_LVALUE = nullptr;
 	if ((yy_buffer_stack_top) > 0)
 		--(yy_buffer_stack_top);
 

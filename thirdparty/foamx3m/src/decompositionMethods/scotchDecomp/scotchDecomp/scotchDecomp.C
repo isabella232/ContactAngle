@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -297,10 +297,10 @@ Foam::label Foam::scotchDecomp::decompose
 			xadj.begin(),		   // verttab, start index per cell into adjncy
 			&xadj[1],			   // vendtab, end index  ,,
 			velotab.begin(),		// velotab, vertex weights
-			NULL,				   // vlbltab
+			nullptr,				   // vlbltab
 			adjncy.size(),		  // edgenbr, number of arcs
 			adjncy.begin(),		 // edgetab
-			NULL					// edlotab, edge weights
+			nullptr					// edlotab, edge weights
 		),
 		"SCOTCH_graphBuild"
 	);
@@ -346,7 +346,7 @@ Foam::label Foam::scotchDecomp::decompose
 
 
 	//SCOTCH_Mapping mapdat;
-	//SCOTCH_graphMapInit(&grafdat, &mapdat, &archdat, NULL);
+	//SCOTCH_graphMapInit(&grafdat, &mapdat, &archdat, nullptr);
 	//SCOTCH_graphMapCompute(&grafdat, &mapdat, &stradat); /* Perform mapping */
 	//SCOTCH_graphMapExit(&grafdat, &mapdat);
 

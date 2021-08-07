@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ inline To& dynamicCast(From& r)
 	{
 		return dynamic_cast<To&>(r);
 	}
-	catch (std::bad_cast)
+	catch (std::bad_cast&)
 	{
 		FatalErrorIn("dynamicCast<To>(From&)")
 			<< "Attempt to cast type " << typeid(r).name()
@@ -109,7 +109,7 @@ inline To& refCast(From& r)
 	{
 		return dynamic_cast<To&>(r);
 	}
-	catch (std::bad_cast)
+	catch (std::bad_cast&)
 	{
 		FatalErrorIn("refCast<To>(From&)")
 			<< "Attempt to cast type " << r.type()

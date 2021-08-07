@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ BlockMatrixAgglomeration<scalar>::restrictMatrix() const
 		<< abort(FatalError);
 
 	// Dummy return to keep compiler happy
-	return autoPtr<BlockAMGLevel<scalar> >(NULL);
+	return autoPtr<BlockAMGLevel<scalar> >(nullptr);
 }
 
 

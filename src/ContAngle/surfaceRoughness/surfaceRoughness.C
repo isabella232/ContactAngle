@@ -143,7 +143,7 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 
     labelField fMarks(faces.size(),1);  /// 1; GrainWalls, 2: OW interface
     labelField pMarks(pointPoints.size(),2); /// 1; GrainWalls and contactline, 2: OW interface
-    scalarField pWeights(pointPoints.size(),1.0); /// 1; GrainWalls and contactline, 2: OW interface
+    scalarField pWeights(pointPoints.size(),1.); /// 1; GrainWalls and contactline, 2: OW interface
 
 	{
 		List< surfZone >   zones = surf123.surfZones(); for(int i=zones.size();i<4;++i) {zones.append(surfZone()); zones[zones.size()-1].start()=faces.size();}
@@ -175,19 +175,19 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
 			const labelLoop& neiPoints = pointPoints[vertI];
 
 			scalar avgPWeights(pWeightsOrig[vertI]);
-			scalar sumWeightsKc(1.0);
+			scalar sumWeightsKc(1.);
 			forAll(neiPoints, neiPointI)
 			{
 				const label neiVertI = neiPoints[neiPointI];
 
-				scalar weight=1.0;
+				scalar weight=1.;
 				avgPWeights += weight * pWeightsOrig[neiVertI];
 				sumWeightsKc += weight;
 			}
 			if (sumWeightsKc>0.5)
 			{
 				avgPWeights /= sumWeightsKc;//myEdges.size();
-				pWeights[vertI] =     0.99*avgPWeights + (1.0-0.99)*pWeightsOrig[vertI]; ///. 0.3 affects convergence,  smaller value makes cl faces bigger
+				pWeights[vertI] =     0.99*avgPWeights + (1.-0.99)*pWeightsOrig[vertI]; ///. 0.3 affects convergence,  smaller value makes cl faces bigger
 			}
 			else
 			{

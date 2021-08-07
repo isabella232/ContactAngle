@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -236,7 +236,7 @@ Foam::ggiAMGInterface::ggiAMGInterface
 	procMasterFaces_(),
 	comm_(fineGgiInterface_.comm()),
 	tag_(fineGgiInterface_.tag()),
-	mapPtr_(NULL),
+	mapPtr_(nullptr),
 	lTime_()
 {
 	// New algorithm will assemble local clusters on the master side and

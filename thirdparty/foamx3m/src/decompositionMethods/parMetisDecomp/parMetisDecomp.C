@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -249,8 +249,8 @@ Foam::label Foam::parMetisDecomp::decompose
 
 	// Weight info
 	int wgtFlag = 0;
-	int* vwgtPtr = NULL;
-	int* adjwgtPtr = NULL;
+	int* vwgtPtr = nullptr;
+	int* adjwgtPtr = nullptr;
 
 	if (cellWeights.size())
 	{

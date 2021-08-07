@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
   		Info<<iNewP*3+3<<"new points,  "<<indF+1-faces.size()<<" new faces"<<endl;
 
 		///. create new point positions, 3 for each conact line vertex
-		Field<point> pointsNew((iNewP+1)*3, point(100.0,100.0,100.0));
+		Field<point> pointsNew((iNewP+1)*3, point(100.,100.,100.));
 		forAll(points, pi)
 		  if(pNewPsP3[pi]>=0) 
 		  {

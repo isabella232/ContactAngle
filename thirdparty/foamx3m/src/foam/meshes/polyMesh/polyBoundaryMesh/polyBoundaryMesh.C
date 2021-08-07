@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ Foam::polyBoundaryMesh::polyBoundaryMesh
 	polyPatchList(),
 	regIOobject(io),
 	mesh_(mesh),
-	neighbourEdgesPtr_(NULL)
+	neighbourEdgesPtr_(nullptr)
 {
 	if (readOpt() == IOobject::MUST_READ)
 	{
@@ -107,7 +107,7 @@ Foam::polyBoundaryMesh::polyBoundaryMesh
 	polyPatchList(size),
 	regIOobject(io),
 	mesh_(pm),
-	neighbourEdgesPtr_(NULL)
+	neighbourEdgesPtr_(nullptr)
 {}
 
 

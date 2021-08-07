@@ -215,7 +215,7 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
             {
 
 
-                SortableList<scalar> closeNess(myEdgeFaces.size(), selectMin ? 1000.0: -1000.0 );
+                SortableList<scalar> closeNess(myEdgeFaces.size(), selectMin ? 1000.: -1000. );
                 vector masterNormal=faces[connectingFace].normal(points);
                 vector Ce=0.5*(points[meshPoints[edges[eI][0]]]+points[meshPoints[edges[eI][1]]]);
                 vector tmf=faces[connectingFace].centre(points)-Ce;
@@ -230,7 +230,7 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
 					const double PI=3.14159265;
 					double angle=std::atan2 (sin,cos) * 180 / PI;
 
-					if ( angle<0.0) angle=360+angle;
+					if ( angle<0.) angle=360+angle;
 					closeNess[fI]=angle;
                 }
 

@@ -144,7 +144,7 @@ void writeSTLBINARY( const voxelImage & vxlImg, std::string outputSurface)
 	#define addPointToFace_m(pointIndex, kkk,jjj,iii, type)                                 \
     if (point_mapper(iii,jjj,kkk)<0)                                                  \
 		{                                                                                   \
-		    points.append(point(dx[0]*(kkk+1.0)+X0[0],dx[1]*(jjj+1.0)+X0[1],dx[2]*(iii+1.0)+X0[2]));     \
+		    points.append(point(dx[0]*(kkk+1.)+X0[0],dx[1]*(jjj+1.)+X0[1],dx[2]*(iii+1.)+X0[2]));     \
         point_mapper(iii,jjj,kkk)=++iPoints;                                          \
 		}                                                                              \
     faces_##type[i##type ##Faces][pointIndex]=point_mapper(iii,jjj,kkk);

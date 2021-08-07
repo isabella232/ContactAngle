@@ -68,7 +68,7 @@ Description
              pNE=0.5*((newPoints[e[1]]-Cf[faceI]) ^ (Ce-Cf[faceI]));
              if( pMarks[e[1]]==fMarks[faceI] ) {    pNw[e[1]] -= pNE;    pNs[e[1]] -= pNE;    }
              else if( fMarks[faceI] != 2 )        pNw[e[1]] -= pNE;
-             else                                pNs[e[1]] -= pNE;//2.0*pNE-mag(pNE)*fNorms[faceI];
+             else                                pNs[e[1]] -= pNE;//2.*pNE-mag(pNE)*fNorms[faceI];
 		 }    
      }
      scalarField pAreas(0.5*mag(pNs)+1e-18+0.5*mag(pNw));
@@ -141,7 +141,7 @@ Description
                     const label pJ = neiPoints[pI];
                     if( pMarks[pJ] == 4  )
                     {
-                        scalar weight=1.0;
+                        scalar weight=1.;
                         avgPos += weight * newPoints[pJ];
                         sumWeights += weight;
                     }
@@ -156,7 +156,7 @@ Description
       }
 
 		Info  <<"Gauss "; cout.flush();
-		newPoints += (1.0-extraRelaxFactorParIntrf)*relax*(displacements & pNw)*pNw + (extraRelaxFactorParIntrf*relax)*(displacements);
+		newPoints += (1.-extraRelaxFactorParIntrf)*relax*(displacements & pNw)*pNw + (extraRelaxFactorParIntrf*relax)*(displacements);
 		newPoints += relaxCL*displacementsCL;
 
     }

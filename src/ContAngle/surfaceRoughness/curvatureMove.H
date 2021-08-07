@@ -35,22 +35,22 @@ Description
          //~ label currentLabel = pMarks[vertI];
          //~ if( currentLabel == 2 || currentLabel == 4  )
          { ///. calculating smooth weight
-             scalar avgAKcp(0.0);
-             vector avgpNorm(0.0,0.0,0.0);
+             scalar avgAKcp(0.);
+             vector avgpNorm(0.,0.,0.);
              scalar sumWeightsKc(1e-18);
              forAll(neiPoints, neiPointI)
              {
                  const label neiVertI = neiPoints[neiPointI];
-                 {    scalar weight=1.0;
+                 {    scalar weight=1.;
                      if( pMarks[neiVertI]==4 ) weight *= 0.1;
                      avgAKcp += weight * pAreas[neiVertI];
                      avgpNorm += pAw[neiVertI];
-                     sumWeightsKc += 1.0;
+                     sumWeightsKc += 1.;
                  }
              }
              if (sumWeightsKc>1e-15)
              {
-                 pAreasS[vertI]   =    0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pAreasS[vertI];
+                 pAreasS[vertI]   =    0.5*avgAKcp/sumWeightsKc + (1.-0.5)*pAreasS[vertI];
                  pNwS[vertI]   =    avgpNorm/sumWeightsKc;
              }
          }
@@ -68,9 +68,9 @@ Description
          Info <<iter<<"     Curvature,"; cout.flush();
 
          ///. point-normal curvature
-         scalarField pKc(pNs.size(),0.0);
-         scalarField pKcw(pNw.size(),0.0);
-         scalarField pKcCL(pNs.size(),0.0);
+         scalarField pKc(pNs.size(),0.);
+         scalarField pKcw(pNw.size(),0.);
+         scalarField pKcCL(pNs.size(),0.);
          scalarField pLCL(pNs.size(),1e-12);
          //~ vectorField Le_ses(newPoints.size(), vector(0,0,0));
          //~ vectorField Nex2s(newPoints.size(), vector(0,0,0));
@@ -158,19 +158,19 @@ Description
 				if( currentLabel == 4 )
 				{ ///. calculating smooth curvature  
 					scalar avgAKcp(pKcCLSmoothTmp[vertI]);
-					scalar sumWeightsKc(1.0);
+					scalar sumWeightsKc(1.);
 					forAll(neiPoints, neiPointI)
 					{
 						const label neiVertI = neiPoints[neiPointI];
 						if( pMarks[neiVertI] == 4  )
 						{
-							scalar weight=1.0;
+							scalar weight=1.;
 							avgAKcp += weight * pKcCLSmoothTmp[neiVertI];
 							sumWeightsKc += weight;
 						}
 					}
 					if (sumWeightsKc>0.5)
-						pKcCLSmooth[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pKcCLSmoothTmp[vertI];
+						pKcCLSmooth[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.-0.5)*pKcCLSmoothTmp[vertI];
 					else
 						pKcCLSmooth[vertI] = pKcCLSmoothTmp[vertI];
 				}
@@ -190,7 +190,7 @@ Description
 				if( currentLabel == 2 || currentLabel == 4  )
 				{ ///. calculating smooth curvature  
 					scalar avgAKcp(pKcSmoothTmp[vertI]);
-					scalar sumWeightsKc(1.0);
+					scalar sumWeightsKc(1.);
 					forAll(neiPoints, neiPointI)
 					{
 						const label neiVertI = neiPoints[neiPointI];
@@ -198,13 +198,13 @@ Description
 						{
 							scalar weight=pWeights[neiVertI];  weight*=weight;weight*=weight;
 							if( pMarks[neiVertI] == 4) weight*=0.01;
-							//~ if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.0;
+							//~ if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.;
 							avgAKcp += weight * pKcSmoothTmp[neiVertI];
 							sumWeightsKc += weight;
 						}
 					}
 					if (sumWeightsKc>0.5)
-						pKcSmooth[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pKcSmoothTmp[vertI];
+						pKcSmooth[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.-0.5)*pKcSmoothTmp[vertI];
 					else
 						pKcSmooth[vertI] = pKcSmoothTmp[vertI];
 				}
@@ -224,7 +224,7 @@ Description
 				if( currentLabel == 2 || currentLabel == 4  )
 				{ ///. calculating smooth curvature  
 					scalar avgAKcp(pKcSmooth2Tmp[vertI]);
-					scalar sumWeightsKc(1.0);
+					scalar sumWeightsKc(1.);
 					forAll(neiPoints, neiPointI)
 					{
 						const label neiVertI = neiPoints[neiPointI];
@@ -232,13 +232,13 @@ Description
 						{
 							scalar weight=pWeights[neiVertI];  weight*=weight;weight*=weight;
 							if( pMarks[neiVertI] == 4) weight*=0.01;  ///.  TODO change 0.01 : 0-1
-							//~ if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.0;
+							//~ if( pMarks[neiVertI] == 4 && currentLabel == 4) weight=10.;
 							avgAKcp += weight * pKcSmooth2Tmp[neiVertI];
 							sumWeightsKc += weight;
 						}
 					}
 					if (sumWeightsKc>0.5)
-						pKcSmooth2[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.0-0.5)*pKcSmooth2Tmp[vertI];
+						pKcSmooth2[vertI] =     0.5*avgAKcp/sumWeightsKc + (1.-0.5)*pKcSmooth2Tmp[vertI];
 					else
 						pKcSmooth2[vertI] = pKcSmooth2Tmp[vertI];
 				}
@@ -261,21 +261,21 @@ Description
 
              if( currentLabel == 4  )
              { ///. contact line curvature uniformization
-                scalar DispCL = 1.0*relaxCL*( -1.0*(pKcSmooth[vertI]-pKcSmooth2[vertI]) + 0.9*(pKc[vertI]-pKcSmooth[vertI])+ 1.0*(pKcCL[vertI]-pKcCLSmooth[vertI]))
+                scalar DispCL = 1.*relaxCL*( -1.*(pKcSmooth[vertI]-pKcSmooth2[vertI]) + 0.9*(pKc[vertI]-pKcSmooth[vertI])+ 1.*(pKcCL[vertI]-pKcCLSmooth[vertI]))
                 *Foam::sqrt(pAreas[vertI]/ (pKcSmooth[vertI]*pKcSmooth[vertI] +0.1/pAreasS[vertI]));
-                newPoints[vertI] +=  DispCL*(pNs[vertI] - (pNs[vertI] & pNw[vertI])*pNw[vertI]);  ///.  TODO change 0.3 , -2.0 , etc		/// 0.3 >> bag impact...!!
+                newPoints[vertI] +=  DispCL*(pNs[vertI] - (pNs[vertI] & pNw[vertI])*pNw[vertI]);  ///.  TODO change 0.3 , -2. , etc		/// 0.3 >> bag impact...!!
              }
              else  if(currentLabel == 2)
              {  ///. curvature uniformization
-                 newPoints[vertI] +=  pNs[vertI] * relax*(0.5*(pKc[vertI]-pKcSmooth[vertI])+8.0*(pKcSmooth[vertI]-pKcSmooth2[vertI]))
-												*Foam::sqrt(pAreas[vertI]/ (pKcSmooth[vertI]*pKcSmooth[vertI]  +0.1/pAreasS[vertI]));  ///.  TODO change -2.0 , etc
+                 newPoints[vertI] +=  pNs[vertI] * relax*(0.5*(pKc[vertI]-pKcSmooth[vertI])+8.*(pKcSmooth[vertI]-pKcSmooth2[vertI]))
+												*Foam::sqrt(pAreas[vertI]/ (pKcSmooth[vertI]*pKcSmooth[vertI]  +0.1/pAreasS[vertI]));  ///.  TODO change -2. , etc
              }
 
 
 
             //~ if( currentLabel == 4  )
             //~ { ///. contact line curvature uniformization
-               //~ vector DispCL =  relaxCL*(-0.05*(pKcSmooth[vertI]-pKc[vertI])+ 5.0*(pKcCL[vertI]-pKcCLSmooth[vertI]))* pAreas[vertI]*pNs[vertI];
+               //~ vector DispCL =  relaxCL*(-0.05*(pKcSmooth[vertI]-pKc[vertI])+ 5.*(pKcCL[vertI]-pKcCLSmooth[vertI]))* pAreas[vertI]*pNs[vertI];
                //~ displacementsRc[vertI] =  (DispCL - (DispCL & pNw[vertI])*pNw[vertI]);
             //~ }
             //~ else  if(currentLabel == 2)
@@ -444,7 +444,7 @@ Description
 				{
 					neiPos -= 1.01*((neiPos-newPoints[vertI])&pNw[vertI])*pNw[vertI];    ///.  TODO change 1.05
 				}
-				else if( pMarks[neiVertI] == 4) weight *= 8.0; ///. TODO: Change 3.333, remove ...
+				else if( pMarks[neiVertI] == 4) weight *= 8.; ///. TODO: Change 3.333, remove ...
 				avgPos += weight * neiPos;
 				sumWeights += weight;
 			}
@@ -459,7 +459,7 @@ Description
 				scalar weight=(pAreas[neiVertI]+0.1*pAreas[vertI]);//*max(NormalsOld[neiVertI]&NormalsOld[vertI],0.001);// /mag(newPoints[neiVertI]-newPoints[vertI]);
 				weight*=weight*pWeights[neiVertI];
 				//~ if( pMarks[neiVertI]!=currentLabel ) weight*=0.9;     ///.  TODO change 0.7, smaller value makes CL faces bigger
-				//~ if( pMarks[neiVertI]==3 ) weight*=2.0;     ///.  TODO change 0.7, smaller value makes CL faces bigger
+				//~ if( pMarks[neiVertI]==3 ) weight*=2.;     ///.  TODO change 0.7, smaller value makes CL faces bigger
 				avgPos += weight * newPoints[neiVertI];
 				sumWeights += weight;
 
@@ -482,7 +482,7 @@ Description
 					//~ const label neiVertI = neiPoints[iii];
 					//~ if( pMarks[neiVertI] == 4  )
 					//~ {
-						//~ scalar weight=1.0;
+						//~ scalar weight=1.;
 						//~ avgPos += weight * newPoints[neiVertI];
 						//~ sumWeights += weight;
 					//~ }
@@ -555,7 +555,7 @@ Description
 
 	Info<< "  A:  ["<<min(pAreas)<<" "<<max(pAreas)<<"] "; cout.flush();
 	Info<< "  kw:  ["<<min(pKcw); cout.flush();
-	//~ Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1e8,1e6),-1e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.0; cout.flush();
+	//~ Info<< " "<< 0.004+(double(average(max(min((pKc-0.004)*1e8,1e6),-1e6)*max(pMarks-3,0))))/(0.0001+double(average(100000*max(pMarks-3,0))))/1000.; cout.flush();
 	Info<< " "<<max(pKcw); cout.flush();
 	Info<< "],  DispMag  max:  "<<max(mag(displacements)); cout.flush();
 	Info<< "  avg:  "<<average(mag(displacements)); cout.flush();

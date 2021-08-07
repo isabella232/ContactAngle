@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -298,8 +298,7 @@ extern messageStream Info;
 
 //- Report an information message using Foam::Info
 //  if the local debug switch is true
-#define DebugInfo															  \
-	if (debug) Info
+//#define DebugInfo	 if (debug) Info
 
 //- Report an information message using Foam::Info
 //  for FUNCTION_NAME in file __FILE__ at line __LINE__

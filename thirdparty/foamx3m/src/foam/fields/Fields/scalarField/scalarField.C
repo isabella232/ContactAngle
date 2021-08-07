@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -131,6 +131,9 @@ UNARY_FUNCTION(scalar, scalar, atanh)
 UNARY_FUNCTION(scalar, scalar, erf)
 UNARY_FUNCTION(scalar, scalar, erfc)
 UNARY_FUNCTION(scalar, scalar, lgamma)
+
+#ifndef __STRICT_ANSI__
+
 UNARY_FUNCTION(scalar, scalar, j0)
 UNARY_FUNCTION(scalar, scalar, j1)
 UNARY_FUNCTION(scalar, scalar, y0)
@@ -163,6 +166,7 @@ BesselFunc(yn)
 
 #undef BesselFunc
 
+#endif //__STRICT_ANSI__
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

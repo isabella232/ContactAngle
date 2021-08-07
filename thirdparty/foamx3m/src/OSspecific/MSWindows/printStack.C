@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ License
 #include "readHexLabel.H"
 
 #include <cxxabi.h>
-#include <dlfcn.h>
+//#include <dlfcn.h>
 #include <stdlib.h>
 #include <search.h>
 #include <stdio.h>
@@ -58,7 +58,7 @@ string pOpen(const string &cmd, label line=0)
 
 			char* s = fgets(buffer, MAX-1, cmdPipe);
 
-			if (s == NULL)
+			if (s == nullptr)
 			{
 #ifdef darwin
 				// workaround for the Python-Script
@@ -392,7 +392,7 @@ void error::printStack(Ostream& os)
 				char* cplusNamePtr = abi::__cxa_demangle
 				(
 					cName.c_str(),
-					NULL,				   // have it malloc itself
+					nullptr,				   // have it malloc itself
 					0,
 					&status
 				);

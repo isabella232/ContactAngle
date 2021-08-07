@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ Foam::fvMatrix<Type>::fvMatrix
 	internalCoeffs_(psi.mesh().boundary().size()),
 	boundaryCoeffs_(psi.mesh().boundary().size()),
 	assemblyCompleted_(false),
-	faceFluxCorrectionPtr_(NULL)
+	faceFluxCorrectionPtr_(nullptr)
 {
 	if (debug)
 	{
@@ -301,7 +301,7 @@ Foam::fvMatrix<Type>::fvMatrix(const fvMatrix<Type>& fvm)
 	internalCoeffs_(fvm.internalCoeffs_),
 	boundaryCoeffs_(fvm.boundaryCoeffs_),
 	assemblyCompleted_(fvm.assemblyCompleted_),
-	faceFluxCorrectionPtr_(NULL)
+	faceFluxCorrectionPtr_(nullptr)
 {
 	if (debug)
 	{
@@ -349,7 +349,7 @@ Foam::fvMatrix<Type>::fvMatrix(const tmp<fvMatrix<Type> >& tfvm)
 		tfvm.isTmp()
 	),
 	assemblyCompleted_(tfvm().assemblyCompleted()),
-	faceFluxCorrectionPtr_(NULL)
+	faceFluxCorrectionPtr_(nullptr)
 {
 	if (debug)
 	{
@@ -363,7 +363,7 @@ Foam::fvMatrix<Type>::fvMatrix(const tmp<fvMatrix<Type> >& tfvm)
 		if (tfvm.isTmp())
 		{
 			faceFluxCorrectionPtr_ = tfvm().faceFluxCorrectionPtr_;
-			tfvm().faceFluxCorrectionPtr_ = NULL;
+			tfvm().faceFluxCorrectionPtr_ = nullptr;
 		}
 		else
 		{
@@ -394,7 +394,7 @@ Foam::fvMatrix<Type>::fvMatrix
 	internalCoeffs_(psi.mesh().boundary().size()),
 	boundaryCoeffs_(psi.mesh().boundary().size()),
 	assemblyCompleted_(false),
-	faceFluxCorrectionPtr_(NULL)
+	faceFluxCorrectionPtr_(nullptr)
 {
 	if (debug)
 	{

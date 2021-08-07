@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -169,10 +169,10 @@ Foam::pointMapper::pointMapper(const mapPolyMesh& mpm)
 	mpm_(mpm),
 	insertedPoints_(true),
 	direct_(false),
-	directAddrPtr_(NULL),
-	interpolationAddrPtr_(NULL),
-	weightsPtr_(NULL),
-	insertedPointLabelsPtr_(NULL)
+	directAddrPtr_(nullptr),
+	interpolationAddrPtr_(nullptr),
+	weightsPtr_(nullptr),
+	insertedPointLabelsPtr_(nullptr)
 {
 	// Check for possibility of direct mapping
 	if (mpm_.pointsFromPointsMap().size() == 0)

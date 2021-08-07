@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -87,6 +87,7 @@ inline Scalar atan2(const Scalar y, const Scalar x)
 	return ::atan2f(y, x);
 }
 
+#ifndef __STRICT_ANSI__
 inline Scalar jn(const int n, const Scalar s)
 {
 	return ::jnf(n, s);
@@ -96,6 +97,7 @@ inline Scalar yn(const int n, const Scalar s)
 {
 	return ::ynf(n, s);
 }
+#endif //__STRICT_ANSI__
 
 #undef Scalar
 #undef ScalarVGREAT

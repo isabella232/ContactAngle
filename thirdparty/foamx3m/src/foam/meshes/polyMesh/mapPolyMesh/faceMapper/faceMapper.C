@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -208,10 +208,10 @@ Foam::faceMapper::faceMapper(const mapPolyMesh& mpm)
 	mpm_(mpm),
 	insertedFaces_(true),
 	direct_(false),
-	directAddrPtr_(NULL),
-	interpolationAddrPtr_(NULL),
-	weightsPtr_(NULL),
-	insertedFaceLabelsPtr_(NULL)
+	directAddrPtr_(nullptr),
+	interpolationAddrPtr_(nullptr),
+	weightsPtr_(nullptr),
+	insertedFaceLabelsPtr_(nullptr)
 {
 	// Check for possibility of direct mapping
 	if

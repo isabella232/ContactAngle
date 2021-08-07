@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -210,8 +210,8 @@ Foam::label Foam::metisDecomp::decompose
 	int edgeCut = 0;
 
 	// Vertex weight info
-	int* vwgtPtr = NULL;
-	int* adjwgtPtr = NULL;
+	int* vwgtPtr = nullptr;
+	int* adjwgtPtr = nullptr;
 
 	if (cellWeights.size())
 	{
@@ -233,11 +233,11 @@ Foam::label Foam::metisDecomp::decompose
 			const_cast<List<int>&>(xadj).begin(),   // indexing into adjncy
 			const_cast<List<int>&>(adjncy).begin(), // neighbour info
 			vwgtPtr,		   // vertexweights
-			NULL,
+			nullptr,
 			adjwgtPtr,		 // no edgeweights
 			&nProcs,
 			processorWeights.begin(),
-			NULL,
+			nullptr,
 			options,
 			&edgeCut,
 			finalDecomp.begin()
@@ -252,11 +252,11 @@ Foam::label Foam::metisDecomp::decompose
 			const_cast<List<int>&>(xadj).begin(),   // indexing into adjncy
 			const_cast<List<int>&>(adjncy).begin(), // neighbour info
 			vwgtPtr,		   // vertexweights
-			NULL,
+			nullptr,
 			adjwgtPtr,		 // no edgeweights
 			&nProcs,
 			processorWeights.begin(),
-			NULL,
+			nullptr,
 			options,
 			&edgeCut,
 			finalDecomp.begin()

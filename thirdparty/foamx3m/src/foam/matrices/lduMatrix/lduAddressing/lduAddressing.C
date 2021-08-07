@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -175,9 +175,9 @@ void Foam::lduAddressing::calcLosortStart() const
 Foam::lduAddressing::lduAddressing(const label nEqns)
 :
 	size_(nEqns),
-	losortPtr_(NULL),
-	ownerStartPtr_(NULL),
-	losortStartPtr_(NULL),
+	losortPtr_(nullptr),
+	ownerStartPtr_(nullptr),
+	losortStartPtr_(nullptr),
 	extendedAddr_(5)
 {}
 

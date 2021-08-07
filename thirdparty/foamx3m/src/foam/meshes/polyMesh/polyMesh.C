@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------*\
   =========                 |
   \\      /  F ield         | foam-extend: Open Source CFD
-   \\    /   O peration     | Version:     4.0
+   \\    /   O peration     | Version:     4.1
     \\  /    A nd           | Web:         http://www.foam-extend.org
      \\/     M anipulation  | For copyright notice see file Copyright
 -------------------------------------------------------------------------------
@@ -299,12 +299,12 @@ Foam::polyMesh::polyMesh(const IOobject& io)
 		),
 		*this
 	),
-	globalMeshDataPtr_(NULL),
+	globalMeshDataPtr_(nullptr),
 	moving_(false),
 	changing_(false),
 	curMotionTimeIndex_(time().timeIndex()),
-	oldAllPointsPtr_(NULL),
-	oldPointsPtr_(NULL)
+	oldAllPointsPtr_(nullptr),
+	oldPointsPtr_(nullptr)
 {
 	if (exists(owner_.objectPath()))
 	{
@@ -485,12 +485,12 @@ Foam::polyMesh::polyMesh
 		*this,
 		0
 	),
-	globalMeshDataPtr_(NULL),
+	globalMeshDataPtr_(nullptr),
 	moving_(false),
 	changing_(false),
 	curMotionTimeIndex_(time().timeIndex()),
-	oldAllPointsPtr_(NULL),
-	oldPointsPtr_(NULL)
+	oldAllPointsPtr_(nullptr),
+	oldPointsPtr_(nullptr)
 {
 	// Check if the faces and cells are valid
 	forAll (allFaces_, faceI)
@@ -646,12 +646,12 @@ Foam::polyMesh::polyMesh
 		*this,
 		0
 	),
-	globalMeshDataPtr_(NULL),
+	globalMeshDataPtr_(nullptr),
 	moving_(false),
 	changing_(false),
 	curMotionTimeIndex_(time().timeIndex()),
-	oldAllPointsPtr_(NULL),
-	oldPointsPtr_(NULL)
+	oldAllPointsPtr_(nullptr),
+	oldPointsPtr_(nullptr)
 {
 	// Check if the faces and cells are valid
 	forAll (allFaces_, faceI)
