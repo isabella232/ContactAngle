@@ -23,7 +23,7 @@ jobs:
     - name: install prerequisites
       run: sudo apt update && sudo apt install mpi-default-dev flex libscotch-dev
     - name: make distclean
-      run: echo not running "make distclean" -> using "Cache lib"
+      run: make distclean # echo not running "make distclean" -> using "Cache lib"
     - name: make
       run: make -j
     - name: test
