@@ -25,6 +25,6 @@ jobs:
     - name: make distclean
       run: make distclean # echo not running "make distclean" -> using "Cache lib"
     - name: make
-      run: make -j
+      run: make -j 1  # Github crashes on -j
     - name: test
       run: echo TODO make test not added yet
