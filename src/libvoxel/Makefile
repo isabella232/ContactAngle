@@ -1,5 +1,5 @@
 
-srcs := voxelImageProcess.cpp
+srcs := voxelImageProcess.cpp  
 tsts := test.py
 all: $(srcs)
 $(info srcs: $(srcs),   tsts: $(tsts) )

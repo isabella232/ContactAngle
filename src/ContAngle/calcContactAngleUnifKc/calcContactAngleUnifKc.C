@@ -103,7 +103,7 @@ Info<< "Time = " << runTime.timeName() << "\n" << endl;
     #define labelLoop face
 
     const pointField & points=surf123.points();
-    const List<face> & faces=surf123.surfFaces();
+    const List<face> & faces=surf123.faces();
     DynamicList<DynamicList<label> > pointPointsTmp(points.size());
     List<labelLoop> pNeips(points.size()); //< adjacent nodes to each node
     forAll(faces,fI)

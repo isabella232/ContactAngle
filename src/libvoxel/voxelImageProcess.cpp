@@ -61,7 +61,7 @@ int main(int argc, char *argv[])  {
 
 	if(header[0]=='?') {
 		cout<<outputName<<" "<<VxlKeysHelp(outputName,extra)<<endl;
-		return 0;}
+		return 0; }
 
 	cout<<"//-*-C-*-\\ voxelImageProcess, in: "<<header<<",  out:"<<outputName<<endl;
 	if(!outputName.size()) cerr<<"\n\nWarning: no output (2nd argument) \n\n"<<endl;

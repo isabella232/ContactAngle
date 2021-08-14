@@ -23,7 +23,8 @@ Martin J Blunt:  m.blunt@imperial.ac.uk
 	creates a surface between the pore and the solid from a 3D rock image
 \*-------------------------------------------------------------------------*/
 
-#define Info Info
+using namespace Foam; // !!!
+
 void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points, bool handlemultipliConnectedEdges  );
 void correctbioti( faceList & faces, labelList& fMarks, DynamicField<point> & points, int stage );
 void correctbioti2( faceList & faces, labelList& fMarks, DynamicField<point> & points, int stage );

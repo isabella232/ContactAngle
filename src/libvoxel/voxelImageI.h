@@ -1181,9 +1181,9 @@ void voxelImageT<T>::PointMedian032(int nAdj0,int nAdj1, T lbl0, T lbl1)  {
 			vj = voxls.v_k( 1,vp);  neiSum0 += vj==lbl0;  neiSum1 += vj==lbl1;
 
 			//neiSum-=voxls(i,j,k);
-			if (neiSum0 >= nAdj0  && vv==lbl1) {  vr=lbl0; ++nChanges;  }
+			if (neiSum0 >= nAdj0 && neiSum0>neiSum1 && vv==lbl1) {  vr=lbl0; ++nChanges;  }
 			else 
-			if (neiSum1 >= nAdj1  && vv==lbl0) {  vr=lbl1;  ++nChanges;  }
+			if (neiSum1 >= nAdj1 && neiSum1>neiSum0 && vv==lbl0) {  vr=lbl1;  ++nChanges;  }
 		}
 	}
 

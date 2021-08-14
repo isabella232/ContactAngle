@@ -4,7 +4,7 @@ msSrc ?= ..
 
 all:  ; 
 	$(MAKE) -f  ${msSrc}/script/Makefile.in  recurseMake USE_msRecurse=1
-	cp AllRunContAngle  ${msSrc}/../bin/foamx3m/
+	cp AllRunContAngle  ${msSrc}/../bin/foamx4m/
 
 clean:; $(MAKE) -f  ${msSrc}/script/Makefile.in  recurseClean USE_msRecurse=1
 

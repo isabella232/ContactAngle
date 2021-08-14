@@ -164,11 +164,11 @@ Description
 				//~ )
 				
 				///cylindrical image
-				if(	
-					mag(points[i][2]-BMin[2])>5.*vxlsize 
-				 && mag(points[i][2]-BMax[2])>5.*vxlsize 
-				 &&	mag(BMid - points[i] - ((BMid - points[i])&zz)*zz)<(radius-5.*vxlsize)
-				  )
+				//if(	//TODO fixme
+					//mag(points[i][2]-BMin[2])>5.*vxlsize 
+				 //&& mag(points[i][2]-BMax[2])>5.*vxlsize 
+				 //&&	mag(BMid - points[i] - ((BMid - points[i])&zz)*zz)<(radius-5.*vxlsize)
+				  //)
 				{
 					//~ offContAngle<<-(cosContactAngle[i])<<"  "<<std::acos(cosContactAngle[i])*180/3.1415926535 <<"\n";
 					offContAngleX<<" "<<points[i][0]<<" "<<points[i][1]<<" "<<points[i][2] << " "<<-(cosContactAngle[i])<<" "<<180-std::acos(cosContactAngle[i])*180/3.1415926535 <<"\n";

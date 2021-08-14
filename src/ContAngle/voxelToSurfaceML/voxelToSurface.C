@@ -29,7 +29,7 @@ Martin J Blunt:  m.blunt@imperial.ac.uk
 
     #include <assert.h>
 
-#include "fvCFD.H" // defines faceList
+#include "faceList.H"
 
 #include "argList.H"
 #include "timeSelector.H"
@@ -172,7 +172,7 @@ inline int appendSinglyConnectedNeis(label meshPI ,DynamicList<label> & group1, 
 	const labelListList& pEdges = surf1.pointEdges();
 	const labelListList& eFaces = surf1.edgeFaces();
 	const List<edge>& edges = surf1.edges();
-	const List<face>& faces = surf1.surfFaces();
+	const List<face>& faces = surf1.faces();
 	const pointField& points = surf1.points();
 	const labelList& meshPoints = surf1.meshPoints();
   forAll(group1, gfI)
@@ -273,7 +273,7 @@ void correct( faceList & faces, labelList& fMarks, DynamicField<point> & points,
 	const labelListList& pFaces = surf1.pointFaces();
 	const labelList& meshPoints = surf1.meshPoints();
 
-	const List<face>& Sfaces = surf1.surfFaces();
+	const List<face>& Sfaces = surf1.faces();
 
 
 

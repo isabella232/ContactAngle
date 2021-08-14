@@ -17,7 +17,7 @@ In the following, this document is organized into three sections. First is **Ins
 
 For build instruction, see [../../script/README.md](https://github.com/aliraeini/ContactAngle/blob/master/src/script/README.md).
 
-Note: Not all OpenFOAM codes support the surface zones required by this code and can not be used instead of the foamx3m provided in the thirdparty folder.
+Note: Not all OpenFOAM codes support the surface zones required by this code and can not be used instead of the foamx4m provided in the pkgs folder.
 
 
 # Usage
@@ -168,7 +168,7 @@ The developed algorithm for measuring surface roughness and its relationship to 
 The ContactAngle and libvoxel codes provided here are released under the terms and conditions of  GNU GENERAL
 PUBLIC LICENSE Version 3 (GPLv3), see: https://www.gnu.org/licenses/gpl-3..en.html
 
-Codes in the thirdparty directory has their own licence terms. For the foamx3m (GPLv3 licence) you need to check individual files -- they are mostly derived from foam-extend but some of the files are updated using codes from OpenFOAM-v16.12+ or more recent versions of official OpenFOAM (released b OpenCFD) and include cfMesh code as well. These codes are in some cases are customized and are not endorsed by their original copy-right holders.
+Codes in the pkgs directory has their own licence terms. For the foamx4m (GPLv3 licence) you need to check individual files -- they are mostly derived from foam-extend but some of the files are updated using codes from OpenFOAM-v16.12+ or more recent versions of official OpenFOAM (released b OpenCFD) and include cfMesh code as well. These codes are in some cases are customized and are not endorsed by their original copy-right holders.
 
 
 
