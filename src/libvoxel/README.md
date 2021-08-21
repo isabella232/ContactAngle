@@ -22,7 +22,7 @@ See [../script/README.md](../script/README.md) for build instructions.
 
 The library is not currently compiled into binary format. It meant to be header only, but to reduce compile time the heavy parts are seperated in the voxelImage.cpp file which is compiled and linked statistically to other executables.
 
-The voxelImageProcess utility is pre-compiled into a Win64 executable in pnextract and pnflow codes, in [../../bin.7z](../../bin.7z).
+The voxelImageProcess utility is pre-compiled into a Win64 executable in [pnextract] and [pnflow] codes, in [../../bin.7z](../../bin.7z).
 
 
 ###  Licence
@@ -40,7 +40,7 @@ See the [Publications on our website], also [Images on our website].
 [Images on our website]: https://www.imperial.ac.uk/earth-science/research/research-groups/pore-scale-modelling/micro-ct-images-and-networks/
 [Imperial College - pore-scale consortium]: https://www.imperial.ac.uk/earth-science/research/research-groups/pore-scale-modelling
 [libtiff]: https://gitlab.com/libtiff/libtiff
-[porefoam]: https://github.com/aliraeini/porefoam
-[pnextract]: https://github.com/aliraeini/pnextract
-[pnflow]: https://github.com/aliraeini/pnflow
+[porefoam]: https://github.com/ImperialCollegeLondon/porefoam
+[pnextract]: https://github.com/ImperialCollegeLondon/pnextract
+[pnflow]: https://github.com/ImperialCollegeLondon/pnflow
 [libz]: https://github.com/madler/zlib

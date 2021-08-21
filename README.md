@@ -1,4 +1,4 @@
-![make_and_test](https://github.com/aliraeini/ContactAngle-Curvature-Roughness/workflows/make_and_test/badge.svg)
+![make_and_test](https://github.com/ImperialCollegeLondon/ContactAngle/workflows/make_and_test/badge.svg)
 
 
 This is a fork of https://github.com/AhmedAlratrout/ContactAngle-Curvature-Roughness (2017).
@@ -8,9 +8,12 @@ Additionally it provides further flexibility on the input image format through t
 The algorithms, however, are kept identical to the original code.
 
  ----------------------------------------------------------------
+ 
 ##  See  [src/ContAngle](src/ContAngle) for specific details on Contact-angle codes.
 
 ##  See  [src/script/README.md](src/script/README.md) for compilation/build instructions.
+
+##  For a docker image with pre-compiled binaries see https://hub.docker.com/r/aliraeini/porescale.  
 
 See also README files for other modules which are located in their own directories:    
 [src/libvoxel](src/libvoxel), [src/script](src/script) and in [thirdparty](thirdparty).
